@@ -1,0 +1,3433 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bilgi ve İnanç — TYT Din Kültürü</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ============ DESIGN TOKENS — original academic system ============ */
+  :root {
+    --ink:        #1B1F3B;   /* midnight navy */
+    --ink-2:      #2A2F55;
+    --ink-3:      #3D4470;
+    --paper:      #FBF7F0;   /* warm cream */
+    --paper-2:    #F3ECDE;   /* deeper cream */
+    --paper-3:    #EBE2CF;
+    --line:       #D8CFB8;
+    --terra:      #D97D54;   /* terracotta accent */
+    --terra-dk:   #B85F39;
+    --amber:      #E8B45A;
+    --moss:       #5B8C5A;
+    --moss-bg:    #E8F0E5;
+    --rust:       #B0413E;
+    --rust-bg:    #F5E2DF;
+    --warn:       #C97B25;
+    --muted:      #6B6E89;
+    --hint:       #9A9DB4;
+
+    /* category palette */
+    --cat-bilgi:        #1B1F3B;
+    --cat-iman:         #6E4C8E;
+    --cat-melekler:     #2E6E8C;
+    --cat-kitaplar:     #4C7A4F;
+    --cat-peygamberler: #A85A2A;
+    --cat-kader:        #8B2E2E;
+
+    --r-card: 14px;
+    --r-btn:  10px;
+    --r-pill: 999px;
+    --shadow-card: 0 1px 0 rgba(27,31,59,0.04), 0 10px 30px -12px rgba(27,31,59,0.18);
+    --shadow-btn:  0 6px 18px -6px rgba(217,125,84,0.55);
+    --t: 320ms cubic-bezier(.2,.7,.2,1);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Manrope', system-ui, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(circle at 12% 8%, rgba(217,125,84,0.06), transparent 40%),
+      radial-gradient(circle at 88% 92%, rgba(232,180,90,0.07), transparent 45%),
+      repeating-linear-gradient(0deg, transparent 0 23px, rgba(27,31,59,0.018) 23px 24px);
+  }
+
+  /* ============ HEADER ============ */
+  .topbar {
+    background: var(--ink);
+    color: var(--paper);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    position: sticky; top: 0; z-index: 50;
+  }
+  .topbar-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 18px 28px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 14px;
+    font-family: 'Newsreader', serif;
+  }
+  .brand-mark {
+    width: 38px; height: 38px;
+    border: 1.5px solid rgba(251,247,240,0.4);
+    border-radius: 6px;
+    display: grid; place-items: center;
+    font-weight: 600; font-size: 18px;
+    color: var(--paper);
+    position: relative;
+    background: linear-gradient(135deg, rgba(217,125,84,0.18), transparent);
+  }
+  .brand-mark::after {
+    content: ""; position: absolute; inset: 4px;
+    border: 1px solid rgba(232,180,90,0.35);
+    border-radius: 3px;
+  }
+  .brand-name { font-size: 20px; font-weight: 600; letter-spacing: 0.01em; }
+  .brand-sub  {
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    color: rgba(251,247,240,0.55);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-left: 14px;
+    padding-left: 14px;
+    border-left: 1px solid rgba(251,247,240,0.18);
+  }
+  .topbar-label {
+    font-size: 12px;
+    color: rgba(251,247,240,0.6);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .topbar-label .dot {
+    display: inline-block; width: 6px; height: 6px;
+    background: var(--terra); border-radius: 50%;
+    margin-right: 8px; vertical-align: middle;
+  }
+
+  /* ============ SHELL / SCREENS ============ */
+  .shell {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 28px 80px;
+  }
+  .screen { display: none; }
+  .screen.active { display: block; animation: enter .55s cubic-bezier(.2,.7,.2,1); }
+  @keyframes enter {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ============ WELCOME ============ */
+  .welcome-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--r-card);
+    padding: 56px 56px 44px;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+  }
+  .welcome-card::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--terra), var(--amber), var(--terra));
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--terra-dk);
+    padding: 6px 14px;
+    border: 1px solid var(--terra);
+    border-radius: var(--r-pill);
+    background: rgba(217,125,84,0.06);
+  }
+  .display {
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    font-size: clamp(40px, 6vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 22px 0 14px;
+    color: var(--ink);
+  }
+  .display em {
+    font-style: italic;
+    color: var(--terra-dk);
+    font-weight: 500;
+  }
+  .lede {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 56ch;
+    margin-bottom: 36px;
+  }
+  .meta-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 36px;
+  }
+  .meta-tile {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 18px;
+    background: var(--paper);
+    display: flex; flex-direction: column; gap: 6px;
+    transition: transform var(--t), border-color var(--t);
+  }
+  .meta-tile:hover { transform: translateY(-2px); border-color: var(--ink-3); }
+  .meta-tile .k {
+    font-size: 11px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--muted); font-weight: 600;
+  }
+  .meta-tile .v {
+    font-family: 'Newsreader', serif;
+    font-size: 22px; font-weight: 600; color: var(--ink);
+    line-height: 1.1;
+  }
+  .meta-tile .s { font-size: 13px; color: var(--muted); }
+
+  .last-score {
+    display: none;
+    align-items: center; gap: 14px;
+    padding: 14px 18px;
+    margin-bottom: 24px;
+    background: var(--paper-2);
+    border: 1px dashed var(--line);
+    border-radius: 10px;
+    font-size: 14px; color: var(--ink-2);
+  }
+  .last-score .ls-num {
+    font-family: 'Newsreader', serif;
+    font-weight: 600; font-size: 20px;
+    color: var(--terra-dk);
+  }
+  .last-score.show { display: flex; }
+
+  /* ============ BUTTONS ============ */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 10px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600; font-size: 15px;
+    padding: 16px 28px;
+    border-radius: var(--r-btn);
+    border: none; cursor: pointer;
+    transition: transform var(--t), background var(--t), box-shadow var(--t), color var(--t);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--paper);
+    box-shadow: 0 8px 24px -10px rgba(27,31,59,0.55);
+  }
+  .btn-primary:hover { background: var(--ink-2); transform: translateY(-1px); }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-accent {
+    background: var(--terra);
+    color: #fff;
+    box-shadow: var(--shadow-btn);
+  }
+  .btn-accent:hover { background: var(--terra-dk); transform: translateY(-1px); }
+  .btn-accent:disabled {
+    background: var(--paper-3); color: var(--muted); cursor: not-allowed;
+    box-shadow: none; transform: none;
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--line);
+  }
+  .btn-ghost:hover { background: var(--paper-2); border-color: var(--ink-3); }
+  .btn-full { width: 100%; }
+
+  /* ============ SUMMARY ============ */
+  .section-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 28px;
+    gap: 20px;
+  }
+  .section-head h2 {
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    font-size: 38px;
+    letter-spacing: -0.015em;
+    margin: 0;
+    color: var(--ink);
+  }
+  .section-head .crumb {
+    font-size: 12px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--muted); font-weight: 600;
+  }
+
+  .topic-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--r-card);
+    margin-bottom: 22px;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    transition: transform var(--t);
+  }
+  .topic-card:hover { transform: translateY(-2px); }
+  .topic-head {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 18px 28px;
+    display: flex; align-items: center; gap: 16px;
+    position: relative;
+  }
+  .topic-head::after {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 4px; background: var(--terra);
+  }
+  .topic-num {
+    font-family: 'Newsreader', serif;
+    font-size: 13px; font-style: italic;
+    color: rgba(251,247,240,0.6);
+    letter-spacing: 0.05em;
+  }
+  .topic-title {
+    font-family: 'Newsreader', serif;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+  }
+  .topic-glyph {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 4px 10px;
+    border: 1px solid rgba(232,180,90,0.4);
+    color: var(--amber);
+    border-radius: var(--r-pill);
+    margin-left: auto;
+    letter-spacing: 0.1em;
+  }
+  .topic-body {
+    padding: 28px 32px 32px;
+    font-size: 15.5px;
+    color: var(--ink-2);
+  }
+  .topic-body ul {
+    margin: 0; padding-left: 0; list-style: none;
+  }
+  .topic-body li {
+    padding: 8px 0;
+    padding-left: 22px;
+    position: relative;
+  }
+  .topic-body li::before {
+    content: "❖";
+    position: absolute; left: 0;
+    color: var(--terra);
+    font-size: 11px;
+    top: 12px;
+  }
+  .topic-body .lead {
+    margin: 0 0 14px;
+    font-size: 16px;
+    color: var(--ink);
+  }
+  .topic-body strong { color: var(--terra-dk); font-weight: 700; }
+  .topic-body .kw { color: var(--terra-dk); font-weight: 700; }
+
+  .ayet {
+    margin: 18px 0;
+    padding: 18px 22px 18px 28px;
+    background: var(--paper-2);
+    border-left: 3px solid var(--amber);
+    border-radius: 6px;
+    font-style: italic;
+    font-family: 'Newsreader', serif;
+    font-size: 15.5px;
+    color: var(--ink);
+    position: relative;
+  }
+  .ayet::before {
+    content: "“";
+    position: absolute; left: 8px; top: -4px;
+    font-size: 36px;
+    color: var(--amber);
+    font-family: 'Newsreader', serif;
+    line-height: 1;
+  }
+  .ayet cite {
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--muted);
+    font-style: normal;
+    font-family: 'Manrope', sans-serif;
+    letter-spacing: 0.05em;
+  }
+
+  .sub-list { margin: 12px 0; }
+  .sub-item {
+    padding: 12px 0 12px 0;
+    border-top: 1px dashed var(--line);
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 18px;
+    align-items: baseline;
+  }
+  .sub-item:first-child { border-top: none; }
+  .sub-key {
+    font-family: 'Newsreader', serif;
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 16px;
+  }
+  .sub-val { font-size: 14.5px; color: var(--ink-2); }
+
+  /* Sıfat blocks (Zâtî / Subûtî with verses) */
+  .sifat-group {
+    margin: 18px 0 8px;
+    padding: 18px 20px 8px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+  .sifat-head {
+    display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .sifat-tag {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700; font-size: 12px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 5px 11px;
+    background: var(--ink); color: var(--paper);
+    border-radius: var(--r-pill);
+  }
+  .sifat-tag.alt { background: var(--terra); }
+  .sifat-sub {
+    font-size: 12.5px;
+    color: var(--muted);
+    font-style: italic;
+    font-family: 'Newsreader', serif;
+  }
+  .sifat {
+    padding: 12px 0;
+    border-top: 1px dashed rgba(216,207,184,0.6);
+  }
+  .sifat:first-of-type { border-top: none; padding-top: 4px; }
+  .sifat-name {
+    font-family: 'Newsreader', serif;
+    font-weight: 600;
+    font-size: 16.5px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .sifat-tr {
+    font-weight: 400;
+    color: var(--muted);
+    font-style: italic;
+    font-size: 14px;
+  }
+  .sifat-def {
+    font-size: 14.5px;
+    color: var(--ink-2);
+    line-height: 1.55;
+    margin-bottom: 6px;
+  }
+  .sifat-ayet {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.55;
+    padding: 8px 14px;
+    background: rgba(232,180,90,0.10);
+    border-left: 2px solid var(--amber);
+    border-radius: 4px;
+  }
+  .sifat-ayet cite {
+    display: inline-block;
+    margin-left: 6px;
+    font-size: 12px;
+    color: var(--muted);
+    font-style: normal;
+    font-family: 'Manrope', sans-serif;
+    letter-spacing: 0.04em;
+  }
+  .sifat-note {
+    margin-top: 18px;
+    padding: 14px 18px;
+    background: var(--paper-2);
+    border-left: 3px solid var(--terra);
+    border-radius: 6px;
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.65;
+  }
+  .sifat-note strong { color: var(--terra-dk); }
+
+  .summary-cta {
+    margin-top: 36px;
+    display: flex; gap: 12px; flex-direction: column;
+  }
+
+  /* ============ QUIZ ============ */
+  .quiz-bar {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--r-card);
+    padding: 16px 22px;
+    margin-bottom: 22px;
+    display: flex; align-items: center; gap: 22px;
+    box-shadow: var(--shadow-card);
+  }
+  .q-counter {
+    font-family: 'Newsreader', serif;
+    font-weight: 600; font-size: 17px;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .q-counter .q-total { color: var(--muted); font-weight: 400; }
+  .progress-wrap { flex: 1; }
+  .progress-track {
+    height: 6px; background: var(--paper-2); border-radius: 999px;
+    overflow: hidden; position: relative;
+  }
+  .progress-fill {
+    height: 100%; background: var(--ink); border-radius: 999px;
+    width: 0%; transition: width 0.5s cubic-bezier(.2,.7,.2,1);
+    position: relative;
+  }
+  .progress-fill::after {
+    content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: 8px;
+    background: var(--terra);
+    box-shadow: 0 0 8px var(--terra);
+  }
+  .timer {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px; font-weight: 500;
+    padding: 8px 14px;
+    background: var(--paper-2);
+    border-radius: var(--r-pill);
+    color: var(--ink);
+    border: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  .timer.warn { background: rgba(201,123,37,0.12); color: var(--warn); border-color: var(--warn); }
+  .timer.danger {
+    background: rgba(176,65,62,0.12); color: var(--rust); border-color: var(--rust);
+    animation: pulse 0.7s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50%     { transform: scale(1.04); }
+  }
+
+  .dots-row {
+    display: flex; flex-wrap: wrap; gap: 5px;
+    margin-bottom: 22px;
+    padding: 0 4px;
+  }
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--paper-3);
+    border: 1px solid var(--line);
+    transition: all var(--t);
+  }
+  .dot.answered { background: var(--ink); border-color: var(--ink); }
+  .dot.correct  { background: var(--moss); border-color: var(--moss); }
+  .dot.wrong    { background: var(--rust); border-color: var(--rust); }
+  .dot.current  {
+    background: var(--terra); border-color: var(--terra);
+    transform: scale(1.4);
+    box-shadow: 0 0 0 3px rgba(217,125,84,0.18);
+  }
+
+  .question-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--r-card);
+    padding: 32px 36px 32px;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+  }
+  .question-card::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+    background: var(--cat, var(--terra));
+  }
+  .q-tags {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin-bottom: 22px;
+  }
+  .tag {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: var(--r-pill);
+  }
+  .tag-cat {
+    background: rgba(255,255,255,0.96);
+    color: var(--cat, var(--ink));
+    border: 1px solid var(--cat, var(--line));
+  }
+  .tag-diff {
+    background: var(--paper-2);
+    color: var(--muted);
+    border: 1px solid var(--line);
+  }
+  .tag-diff.easy   { background: rgba(91,140,90,0.12); color: var(--moss); border-color: var(--moss); }
+  .tag-diff.medium { background: rgba(232,180,90,0.18); color: var(--terra-dk); border-color: var(--amber); }
+  .tag-diff.hard   { background: rgba(176,65,62,0.10); color: var(--rust); border-color: var(--rust); }
+
+  .q-paragraph {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--cat, var(--terra));
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin: 0 0 18px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-2);
+    font-family: 'Manrope', sans-serif;
+  }
+  .q-text {
+    font-family: 'Newsreader', serif;
+    font-size: 21px;
+    line-height: 1.4;
+    color: var(--ink);
+    margin: 0 0 22px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+
+  .hint-card {
+    display: none;
+    background: rgba(232,180,90,0.10);
+    border: 1px dashed var(--amber);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 0 0 18px;
+    animation: fbIn .35s cubic-bezier(.2,.7,.2,1);
+  }
+  .hint-card.show { display: block; }
+  .hint-head {
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700; font-size: 12px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--terra-dk);
+    margin-bottom: 6px;
+  }
+  .hint-body {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+
+  .auto-advance {
+    display: none;
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    animation: fbIn .35s cubic-bezier(.2,.7,.2,1);
+  }
+  .auto-advance.show { display: block; }
+  .aa-row {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .aa-label {
+    font-size: 12px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--muted);
+    font-weight: 600;
+  }
+  .aa-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px; font-weight: 500;
+    color: var(--terra-dk);
+  }
+  .aa-track {
+    height: 4px;
+    background: rgba(27,31,59,0.08);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .aa-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--terra), var(--amber));
+    border-radius: 999px;
+    transition: width 1s linear;
+  }
+  .aa-hint {
+    margin-top: 8px;
+    font-size: 11.5px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.02em;
+  }
+
+  .timer.paused {
+    opacity: 0.5;
+    background: var(--paper-2);
+    color: var(--muted);
+    border-color: var(--line);
+    text-decoration: line-through;
+  }
+
+  .options {
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .option {
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: #fff;
+    border: 1.5px solid var(--line);
+    border-radius: var(--r-btn);
+    cursor: pointer;
+    transition: all var(--t);
+    text-align: left;
+    font-family: 'Manrope', sans-serif;
+    font-size: 15.5px;
+    color: var(--ink);
+    line-height: 1.5;
+    position: relative;
+  }
+  .option:hover:not(:disabled):not(.locked) {
+    background: var(--paper-2);
+    border-color: var(--ink-3);
+    transform: translateX(4px);
+  }
+  .opt-letter {
+    width: 34px; height: 34px;
+    border-radius: 8px;
+    background: var(--paper-2);
+    color: var(--ink);
+    display: grid; place-items: center;
+    font-family: 'Newsreader', serif;
+    font-weight: 600; font-size: 17px;
+    border: 1px solid var(--line);
+    transition: all var(--t);
+  }
+  .opt-text { flex: 1; }
+  .opt-mark { width: 22px; color: transparent; font-weight: 700; }
+
+  .option.correct {
+    background: var(--moss-bg);
+    border-color: var(--moss);
+  }
+  .option.correct .opt-letter {
+    background: var(--moss); color: #fff; border-color: var(--moss);
+  }
+  .option.correct .opt-mark { color: var(--moss); }
+  .option.wrong {
+    background: var(--rust-bg);
+    border-color: var(--rust);
+  }
+  .option.wrong .opt-letter {
+    background: var(--rust); color: #fff; border-color: var(--rust);
+  }
+  .option.wrong .opt-mark { color: var(--rust); }
+  .option.dimmed {
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  .option.locked { cursor: default; }
+
+  .feedback {
+    margin-top: 20px;
+    padding: 18px 22px;
+    border-radius: 10px;
+    font-size: 14.5px;
+    line-height: 1.65;
+    animation: fbIn .4s cubic-bezier(.2,.7,.2,1);
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.correct {
+    background: var(--moss-bg);
+    border-left: 3px solid var(--moss);
+    color: #2F5A2F;
+  }
+  .feedback.wrong {
+    background: var(--rust-bg);
+    border-left: 3px solid var(--rust);
+    color: #6B2624;
+  }
+  .feedback .fb-head {
+    font-family: 'Newsreader', serif;
+    font-weight: 600; font-size: 16px;
+    margin-bottom: 4px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  @keyframes fbIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .quiz-foot {
+    margin-top: 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px;
+  }
+  .hint-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 18px;
+    background: #fff;
+    border: 1px dashed var(--amber);
+    color: var(--terra-dk);
+    border-radius: var(--r-btn);
+    font-weight: 600; font-size: 13.5px;
+    cursor: pointer;
+    transition: all var(--t);
+    font-family: 'Manrope', sans-serif;
+  }
+  .hint-btn:hover:not(:disabled) { background: rgba(232,180,90,0.12); }
+  .hint-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .hint-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    padding: 2px 8px;
+    background: var(--paper-2);
+    border-radius: 999px;
+  }
+
+  /* ============ RESULTS ============ */
+  .results-hero {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--r-card);
+    padding: 48px 40px;
+    box-shadow: var(--shadow-card);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .results-hero::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--terra), var(--amber));
+  }
+  .score-ring {
+    width: 180px; height: 180px;
+    position: relative;
+  }
+  .score-ring svg { transform: rotate(-90deg); }
+  .score-ring .track { stroke: var(--paper-2); }
+  .score-ring .fill {
+    stroke: var(--terra);
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1.6s cubic-bezier(.2,.7,.2,1);
+  }
+  .score-num {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .score-num .big {
+    font-family: 'Newsreader', serif;
+    font-size: 48px; font-weight: 600;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .score-num .big .of {
+    color: var(--muted);
+    font-size: 24px; font-weight: 400;
+  }
+  .score-num .pct {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 6px;
+    letter-spacing: 0.08em;
+  }
+  .verdict { padding: 8px 0; }
+  .verdict-tag {
+    display: inline-block;
+    font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--terra-dk); font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .verdict-title {
+    font-family: 'Newsreader', serif;
+    font-size: 34px; font-weight: 500;
+    line-height: 1.15; letter-spacing: -0.015em;
+    color: var(--ink);
+    margin: 0 0 8px;
+  }
+  .verdict-sub { font-size: 15px; color: var(--muted); max-width: 36ch; }
+
+  .panel {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--r-card);
+    padding: 28px 32px;
+    box-shadow: var(--shadow-card);
+    margin-bottom: 22px;
+  }
+  .panel h3 {
+    font-family: 'Newsreader', serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 20px;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+
+  .cat-rows { display: flex; flex-direction: column; gap: 14px; }
+  .cat-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: center;
+  }
+  .cat-row .cr-name {
+    font-family: 'Newsreader', serif;
+    font-weight: 500; font-size: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .cat-swatch {
+    width: 10px; height: 10px; border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .cat-row .cr-bar {
+    grid-column: 1 / -1;
+    height: 4px;
+    background: var(--paper-2);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .cat-row .cr-bar > div {
+    height: 100%; border-radius: 999px;
+    transition: width 1s cubic-bezier(.2,.7,.2,1);
+  }
+  .cr-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .wrong-list { display: flex; flex-direction: column; gap: 10px; }
+  .wrong-item {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--paper);
+  }
+  .wrong-head {
+    padding: 14px 18px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px;
+    font-size: 14.5px;
+    color: var(--ink);
+    transition: background var(--t);
+  }
+  .wrong-head:hover { background: var(--paper-2); }
+  .wrong-head .wh-q {
+    flex: 1;
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+  }
+  .wrong-head .wh-meta {
+    font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--muted); font-weight: 600;
+    flex-shrink: 0;
+  }
+  .wrong-head .chev {
+    transition: transform var(--t);
+    color: var(--muted);
+  }
+  .wrong-item.open .chev { transform: rotate(180deg); }
+  .wrong-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(.2,.7,.2,1);
+  }
+  .wrong-body-inner {
+    padding: 0 18px 18px;
+    font-size: 14px; color: var(--ink-2);
+    line-height: 1.6;
+  }
+  .wrong-body-inner .lbl {
+    font-size: 11px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--muted); font-weight: 600;
+    margin-top: 8px; margin-bottom: 2px; display: block;
+  }
+  .wrong-body-inner .your   { color: var(--rust); font-weight: 600; }
+  .wrong-body-inner .right  { color: var(--moss); font-weight: 600; }
+
+  .results-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  /* ============ FOOTER ============ */
+  .foot {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 30px 28px 50px;
+    font-size: 12px;
+    color: var(--hint);
+    letter-spacing: 0.04em;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ============ CONFETTI ============ */
+  canvas#confetti {
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 100;
+  }
+
+  /* ============ NEW SCREENS (v2: diagnostic, hub, level reveal, final) ============ */
+
+  .btn-text-reset {
+    display: block;
+    margin: 16px auto 0;
+    background: none; border: none;
+    color: var(--muted);
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: var(--line);
+    text-underline-offset: 4px;
+  }
+  .btn-text-reset:hover { color: var(--rust); }
+
+  /* Diagnostic intro tiles */
+  .lr-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 28px 0 32px;
+  }
+  .lr-tile {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px;
+    background: var(--paper);
+    text-align: left;
+    display: flex; flex-direction: column; gap: 8px;
+    transition: transform var(--t), border-color var(--t);
+  }
+  .lr-tile:hover { transform: translateY(-2px); border-color: var(--ink-3); }
+  .lr-tile-pin {
+    width: 24px; height: 6px; border-radius: 999px;
+  }
+  .lr-tile-label {
+    font-family: 'Newsreader', serif;
+    font-weight: 600; font-size: 19px;
+    color: var(--ink);
+  }
+  .lr-tile-meta {
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.5;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.01em;
+  }
+
+  /* Level reveal */
+  .lr-card { padding: 56px 48px; }
+  .lr-result-row {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    align-items: center;
+    gap: 28px;
+    margin: 28px 0 22px;
+    padding: 28px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .lr-score-block { text-align: center; }
+  .lr-score-num {
+    font-family: 'Newsreader', serif;
+    font-weight: 600; font-size: 56px;
+    color: var(--ink);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .lr-score-cap {
+    font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--muted);
+    font-weight: 600;
+    margin-top: 6px;
+  }
+  .lr-arrow {
+    font-size: 32px; color: var(--terra);
+    font-family: 'Newsreader', serif;
+  }
+  .lr-level-block { }
+  .lr-level-cap {
+    font-size: 11px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .lr-level {
+    font-family: 'Newsreader', serif;
+    font-weight: 600; font-size: 42px;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+  .lr-sub-text {
+    font-size: 15px;
+    color: var(--muted);
+    margin: 0 0 28px;
+    max-width: none;
+  }
+  .lr-params {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .lr-param {
+    padding: 14px 16px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    text-align: center;
+  }
+  .lr-param-k {
+    font-size: 10.5px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .lr-param-v {
+    font-family: 'Newsreader', serif;
+    font-weight: 600; font-size: 22px;
+    color: var(--ink);
+  }
+
+  /* HUB */
+  .hub-header {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 22px;
+    margin-bottom: 24px;
+  }
+  .hub-title {
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    font-size: 42px;
+    letter-spacing: -0.02em;
+    margin: 6px 0 6px;
+    color: var(--ink);
+  }
+  .hub-title em { font-style: italic; color: var(--terra-dk); }
+  .hub-sub {
+    font-size: 14px;
+    color: var(--muted);
+    margin: 0;
+    max-width: 50ch;
+  }
+  .hub-level-chip {
+    background: var(--terra);
+    color: #fff;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700; font-size: 11px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 8px 16px;
+    border-radius: var(--r-pill);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .hub-progress-bar {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--r-card);
+    padding: 16px 22px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-card);
+  }
+  .hub-progress-track {
+    height: 6px;
+    background: var(--paper-2);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .hub-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--terra), var(--amber));
+    border-radius: 999px;
+    transition: width .6s cubic-bezier(.2,.7,.2,1);
+    width: 0%;
+  }
+  .hub-progress-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .hub-progress-text span {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .hub-modules {
+    display: flex; flex-direction: column;
+    gap: 10px;
+  }
+  .mod-card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 18px;
+    padding: 16px 20px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--r-card);
+    cursor: pointer;
+    text-align: left;
+    font-family: 'Manrope', sans-serif;
+    transition: transform var(--t), border-color var(--t), box-shadow var(--t);
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+  }
+  .mod-card::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: var(--line);
+    transition: background var(--t);
+  }
+  .mod-card:hover {
+    transform: translateX(4px);
+    border-color: var(--ink-3);
+  }
+  .mod-card.done::before { background: var(--moss); }
+  .mod-card.open.kind-diagnostic::before { background: var(--ink); }
+  .mod-card.open.kind-topic::before { background: var(--terra); }
+  .mod-card.open.kind-karma::before { background: var(--amber); }
+  .mod-card.open.kind-final::before { background: var(--rust); }
+  .mod-card.done {
+    background: linear-gradient(90deg, rgba(91,140,90,0.04) 0%, #fff 30%);
+  }
+  .mod-left {
+    display: flex; flex-direction: column;
+    align-items: flex-start; gap: 4px;
+    min-width: 64px;
+  }
+  .mod-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em;
+    color: var(--muted);
+    padding: 3px 8px;
+    background: var(--paper-2);
+    border-radius: 4px;
+    font-weight: 500;
+  }
+  .mod-card.done .mod-badge { background: rgba(91,140,90,0.15); color: var(--moss); }
+  .mod-card.kind-topic .mod-badge { color: var(--terra-dk); background: rgba(217,125,84,0.10); }
+  .mod-card.kind-karma .mod-badge { color: var(--terra-dk); background: rgba(232,180,90,0.15); }
+  .mod-card.kind-final .mod-badge { color: var(--rust); background: rgba(176,65,62,0.10); }
+  .mod-num {
+    font-family: 'Newsreader', serif;
+    font-weight: 600; font-size: 24px;
+    color: var(--ink-3);
+    line-height: 1;
+  }
+  .mod-card.done .mod-num { color: var(--moss); }
+  .mod-meta { min-width: 0; }
+  .mod-label {
+    font-family: 'Newsreader', serif;
+    font-weight: 600; font-size: 18px;
+    color: var(--ink);
+    line-height: 1.25;
+    margin-bottom: 3px;
+    letter-spacing: -0.005em;
+  }
+  .mod-sub {
+    font-size: 13px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.02em;
+  }
+  .mod-card.done .mod-sub { color: var(--moss); font-weight: 500; }
+  .mod-cta {
+    font-family: 'Newsreader', serif;
+    font-size: 28px;
+    color: var(--terra);
+    font-weight: 500;
+    line-height: 1;
+    padding: 0 6px;
+  }
+  .mod-card.done .mod-cta { color: var(--muted); font-size: 22px; }
+
+  /* Adaptif Pratik (post-final unlimited practice) */
+  .practice-block { margin-top: 26px; }
+  .practice-divider {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 12px;
+    color: var(--muted);
+  }
+  .practice-divider::before, .practice-divider::after {
+    content: ""; flex: 1; height: 1px; background: var(--line);
+  }
+  .practice-divider span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.25em;
+    font-weight: 600;
+  }
+  .mod-card.practice-card {
+    background: linear-gradient(135deg, #fff 0%, rgba(232,180,90,0.07) 100%);
+  }
+  .mod-card.practice-card.locked {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  .mod-card.practice-card.locked:hover {
+    transform: none;
+    border-color: var(--line);
+  }
+  .mod-card.kind-practice::before { background: var(--amber); }
+  .mod-card.kind-practice.locked::before { background: var(--line); }
+  .mod-card.kind-practice .mod-badge {
+    background: rgba(232,180,90,0.20);
+    color: #8B6E2A;
+  }
+  .mod-card.kind-practice.locked .mod-badge {
+    background: var(--paper-2);
+    color: var(--hint);
+  }
+  .pp-num {
+    font-family: 'Newsreader', serif !important;
+    font-weight: 400 !important;
+    font-size: 32px !important;
+    color: var(--amber) !important;
+    line-height: 0.85 !important;
+  }
+  .mod-card.kind-practice.locked .pp-num { color: var(--hint) !important; }
+  .pp-dots {
+    display: flex; gap: 5px;
+    margin-top: 6px;
+  }
+  .pp-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--paper-3);
+    border: 1px solid var(--line);
+  }
+  .pp-dot.good { background: var(--moss); border-color: var(--moss); }
+  .pp-dot.mid  { background: var(--amber); border-color: var(--amber); }
+  .pp-dot.low  { background: var(--rust); border-color: var(--rust); }
+
+  .hub-footer {
+    display: flex; gap: 12px; justify-content: space-between;
+    margin-top: 28px;
+  }
+
+  /* Quiz module strip */
+  .quiz-module-strip {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 4px 14px;
+    margin-bottom: 6px;
+  }
+  .qm-label {
+    font-family: 'Newsreader', serif;
+    font-size: 17px; font-weight: 600;
+    color: var(--ink);
+  }
+  .qm-exit {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--muted);
+    padding: 6px 12px;
+    border-radius: var(--r-pill);
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all var(--t);
+  }
+  .qm-exit:hover { color: var(--ink); border-color: var(--ink-3); }
+
+  /* Result strip */
+  .res-module-strip {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 14px;
+    gap: 14px;
+  }
+
+  /* Final summary */
+  .fs-hero {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--r-card);
+    padding: 28px 32px;
+    margin: 28px 0 20px;
+    text-align: center;
+  }
+  .fs-hero-big {
+    font-family: 'Newsreader', serif;
+    font-weight: 600;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+  .fs-hero-pct {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.04em;
+  }
+  .fs-hero-pct span {
+    color: var(--terra-dk);
+    font-weight: 600;
+    font-size: 18px;
+  }
+  .fs-rows {
+    display: flex; flex-direction: column; gap: 8px;
+    margin-bottom: 20px;
+  }
+  .fs-row {
+    display: grid;
+    grid-template-columns: 1fr 120px 60px;
+    gap: 14px; align-items: center;
+    padding: 10px 14px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+  .fs-label {
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    font-size: 14.5px;
+    color: var(--ink);
+  }
+  .fs-bar {
+    height: 4px;
+    background: var(--paper-2);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .fs-bar-fill {
+    height: 100%;
+    background: var(--terra);
+    border-radius: 999px;
+  }
+  .fs-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    text-align: right;
+    font-weight: 500;
+  }
+
+  /* Results actions for new screens */
+  .results-actions {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    gap: 10px;
+    margin-top: 24px;
+  }
+  #screen-final .results-actions { grid-template-columns: auto 1fr; }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 720px) {
+    .topbar-inner { padding: 14px 18px; }
+    .brand-sub { display: none; }
+    .shell { padding: 28px 18px 60px; }
+    .welcome-card { padding: 36px 24px 30px; }
+    .display { font-size: 36px; }
+    .meta-row { grid-template-columns: 1fr; }
+    .topic-body { padding: 20px 22px; }
+    .sub-item { grid-template-columns: 1fr; gap: 4px; }
+    .question-card { padding: 24px 22px; }
+    .q-text { font-size: 18px; }
+    .quiz-bar { flex-wrap: wrap; gap: 12px; }
+    .progress-wrap { order: 3; flex: 1 1 100%; }
+    .results-hero {
+      grid-template-columns: 1fr;
+      padding: 32px 24px;
+      gap: 24px;
+      justify-items: center;
+      text-align: center;
+    }
+    .verdict-sub { margin: 0 auto; }
+    .results-actions { grid-template-columns: 1fr; }
+    .section-head h2 { font-size: 28px; }
+    /* v2 mobile */
+    .lr-grid { grid-template-columns: 1fr; }
+    .lr-card { padding: 36px 24px; }
+    .lr-result-row { grid-template-columns: 1fr; gap: 14px; justify-items: center; text-align: center; }
+    .lr-arrow { transform: rotate(90deg); }
+    .lr-params { grid-template-columns: 1fr; }
+    .hub-header { flex-direction: column; }
+    .hub-title { font-size: 32px; }
+    .mod-card { padding: 14px 16px; gap: 12px; grid-template-columns: auto 1fr auto; }
+    .mod-left { min-width: 48px; }
+    .mod-num { font-size: 20px; }
+    .mod-label { font-size: 16px; }
+    .fs-row { grid-template-columns: 1fr auto; }
+    .fs-row .fs-bar { grid-column: 1 / -1; order: 3; }
+    .res-module-strip { flex-wrap: wrap; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     PREMIUM DARK GAMING OVERRIDE — glassmorphism + neon
+     Soru içerikleri DEĞİŞTİRİLMEDİ, yalnızca görünüm
+  ═══════════════════════════════════════════════════════════ */
+  :root {
+    --ink:        #f1f5ff;
+    --ink-2:      #c8d0f0;
+    --ink-3:      #a0b0e0;
+    --paper:      #0d0e1a;
+    --paper-2:    #12132b;
+    --paper-3:    #1a1b35;
+    --line:       rgba(120,130,220,0.18);
+    --terra:      #7c3aed;
+    --terra-dk:   #a78bfa;
+    --amber:      #f59e0b;
+    --moss:       #10b981;
+    --moss-bg:    rgba(16,185,129,0.12);
+    --rust:       #f43f5e;
+    --rust-bg:    rgba(244,63,94,0.12);
+    --warn:       #f59e0b;
+    --muted:      rgba(200,208,240,0.55);
+    --hint:       rgba(200,208,240,0.35);
+    --cat-bilgi:        #06b6d4;
+    --cat-iman:         #8b5cf6;
+    --cat-melekler:     #3b82f6;
+    --cat-kitaplar:     #10b981;
+    --cat-peygamberler: #f59e0b;
+    --cat-kader:        #f43f5e;
+    --r-card: 18px;
+    --r-btn:  12px;
+    --shadow-card: 0 0 0 1px rgba(120,130,220,0.1), 0 20px 60px -20px rgba(0,0,0,0.8);
+    --shadow-btn:  0 0 30px -5px rgba(124,58,237,0.6);
+    --t: 280ms cubic-bezier(.2,.7,.2,1);
+  }
+
+  /* ── Body ── */
+  body {
+    background: #06060f;
+    background-image:
+      radial-gradient(ellipse at 15% 10%, rgba(124,58,237,0.18), transparent 50%),
+      radial-gradient(ellipse at 85% 90%, rgba(6,182,212,0.13), transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(124,58,237,0.06), transparent 70%);
+  }
+
+  /* ── Topbar ── */
+  .topbar {
+    background: rgba(6,6,18,0.88);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-bottom: 1px solid rgba(124,58,237,0.28);
+    box-shadow: 0 4px 40px rgba(0,0,0,0.5);
+  }
+  .brand-mark {
+    background: linear-gradient(135deg, #7c3aed, #06b6d4);
+    border: none;
+    box-shadow: 0 0 22px rgba(124,58,237,0.55);
+  }
+  .brand-mark::after { display: none; }
+
+  /* ── Glass Cards ── */
+  .welcome-card, .panel, .quiz-bar, .results-hero,
+  .topic-card, .mod-card, .hub-progress-bar, .question-card {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(24px) saturate(150%);
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.07);
+  }
+  .welcome-card::before {
+    background: linear-gradient(90deg, #7c3aed, #06b6d4, #7c3aed);
+    height: 3px;
+  }
+
+  /* ── Buttons ── */
+  .btn-primary {
+    background: rgba(255,255,255,0.07);
+    color: #f1f5ff;
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: none;
+  }
+  .btn-primary:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.2); }
+
+  .btn-accent {
+    background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 50%, #0891b2 100%);
+    color: #fff;
+    border: none;
+    box-shadow: 0 0 32px rgba(124,58,237,0.45), 0 4px 20px rgba(0,0,0,0.35);
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-accent::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.18), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .btn-accent:hover::before { opacity: 1; }
+  .btn-accent:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 55px rgba(124,58,237,0.65), 0 8px 32px rgba(0,0,0,0.4);
+  }
+  .btn-accent:active { transform: translateY(0); }
+  .btn-accent:disabled {
+    background: rgba(255,255,255,0.06);
+    color: rgba(200,208,240,0.3);
+    box-shadow: none;
+  }
+
+  .btn-ghost {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(200,208,240,0.75);
+  }
+  .btn-ghost:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(124,58,237,0.45);
+    color: #f1f5ff;
+  }
+
+  /* ── Eyebrow ── */
+  .eyebrow {
+    background: rgba(124,58,237,0.14);
+    border: 1px solid rgba(124,58,237,0.38);
+    color: #a78bfa;
+  }
+
+  /* ── Meta tiles ── */
+  .meta-tile {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .meta-tile:hover {
+    background: rgba(124,58,237,0.1);
+    border-color: rgba(124,58,237,0.32);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(124,58,237,0.22);
+  }
+
+  /* ── Progress ── */
+  .progress-track, .hub-progress-track, .aa-track, .fs-bar, .cr-bar {
+    background: rgba(255,255,255,0.06);
+  }
+  .progress-fill {
+    background: linear-gradient(90deg, #7c3aed, #06b6d4);
+  }
+  .progress-fill::after {
+    background: #06b6d4;
+    box-shadow: 0 0 14px #06b6d4;
+  }
+  .hub-progress-fill, .aa-fill, .fs-bar-fill {
+    background: linear-gradient(90deg, #7c3aed, #06b6d4);
+  }
+
+  /* ── Timer ── */
+  .timer {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #f1f5ff;
+  }
+  .timer.warn  { background: rgba(245,158,11,0.14); border-color: rgba(245,158,11,0.4); color: #fbbf24; }
+  .timer.danger {
+    background: rgba(244,63,94,0.14);
+    border-color: rgba(244,63,94,0.5);
+    color: #f43f5e;
+    box-shadow: 0 0 22px rgba(244,63,94,0.35);
+  }
+
+  /* ── Dots ── */
+  .dot { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.14); }
+  .dot.answered { background: rgba(124,58,237,0.65); border-color: #7c3aed; }
+  .dot.correct  { background: #10b981; border-color: #10b981; box-shadow: 0 0 9px #10b981; }
+  .dot.wrong    { background: #f43f5e; border-color: #f43f5e; box-shadow: 0 0 9px #f43f5e; }
+  .dot.current  {
+    background: #7c3aed; border-color: #7c3aed;
+    box-shadow: 0 0 0 3px rgba(124,58,237,0.25), 0 0 18px rgba(124,58,237,0.55);
+  }
+
+  /* ── Options ── */
+  .option {
+    background: rgba(255,255,255,0.03);
+    border: 1.5px solid rgba(255,255,255,0.08);
+    color: #f1f5ff;
+  }
+  .option:hover:not(:disabled):not(.locked) {
+    background: rgba(124,58,237,0.11);
+    border-color: rgba(124,58,237,0.42);
+    transform: translateX(6px);
+    box-shadow: 0 0 22px rgba(124,58,237,0.18);
+  }
+  .opt-letter {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(255,255,255,0.12);
+    color: #f1f5ff;
+  }
+  .option.correct {
+    background: rgba(16,185,129,0.12);
+    border-color: #10b981;
+    box-shadow: 0 0 28px rgba(16,185,129,0.22);
+  }
+  .option.correct .opt-letter {
+    background: #10b981; border-color: #10b981;
+    box-shadow: 0 0 16px rgba(16,185,129,0.55);
+  }
+  .option.wrong {
+    background: rgba(244,63,94,0.12);
+    border-color: #f43f5e;
+    box-shadow: 0 0 28px rgba(244,63,94,0.22);
+  }
+  .option.wrong .opt-letter {
+    background: #f43f5e; border-color: #f43f5e;
+    box-shadow: 0 0 16px rgba(244,63,94,0.55);
+  }
+  .option.dimmed { opacity: 0.22; }
+
+  /* ── Feedback ── */
+  .feedback.correct { background: rgba(16,185,129,0.1); border-left-color: #10b981; color: #6ee7b7; }
+  .feedback.wrong   { background: rgba(244,63,94,0.1);  border-left-color: #f43f5e; color: #fda4af; }
+
+  /* ── Hint ── */
+  .hint-btn {
+    background: rgba(245,158,11,0.08);
+    border: 1px solid rgba(245,158,11,0.28);
+    color: #fbbf24;
+  }
+  .hint-btn:hover:not(:disabled) {
+    background: rgba(245,158,11,0.16);
+    border-color: rgba(245,158,11,0.45);
+    box-shadow: 0 0 22px rgba(245,158,11,0.22);
+  }
+  .hint-card { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.25); }
+
+  /* ── Topic cards ── */
+  .topic-head {
+    background: linear-gradient(135deg, rgba(124,58,237,0.32), rgba(6,182,212,0.22));
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .topic-head::after { background: linear-gradient(180deg, #7c3aed, #06b6d4); }
+
+  /* ── Mod cards ── */
+  .mod-card:hover {
+    background: rgba(124,58,237,0.08);
+    border-color: rgba(124,58,237,0.3);
+    box-shadow: 0 0 32px rgba(124,58,237,0.16), inset 0 1px 0 rgba(255,255,255,0.07);
+  }
+  .mod-card.done { background: rgba(16,185,129,0.06); border-color: rgba(16,185,129,0.22); }
+  .mod-card.done::before  { background: #10b981; }
+  .mod-card.open.kind-diagnostic::before { background: #06b6d4; }
+  .mod-card.open.kind-topic::before      { background: #7c3aed; }
+  .mod-card.open.kind-karma::before      { background: #f59e0b; }
+  .mod-card.open.kind-final::before      { background: #f43f5e; }
+
+  /* ── Score ring ── */
+  .score-ring .track { stroke: rgba(255,255,255,0.07); }
+  .score-ring .fill  { stroke: #7c3aed; filter: drop-shadow(0 0 10px rgba(124,58,237,0.65)); }
+
+  /* ── Hub level chip ── */
+  .hub-level-chip { background: linear-gradient(135deg, #7c3aed, #06b6d4); }
+
+  /* ── Sifat groups ── */
+  .sifat-group { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); }
+  .sifat-tag     { background: rgba(124,58,237,0.65); }
+  .sifat-tag.alt { background: rgba(6,182,212,0.65); }
+
+  /* ── Ayet ── */
+  .ayet { background: rgba(245,158,11,0.08); border-left-color: #f59e0b; color: #fde68a; }
+  .ayet::before { color: rgba(245,158,11,0.55); }
+  .sifat-ayet   { background: rgba(245,158,11,0.08); border-left-color: #f59e0b; color: #fde68a; }
+
+  /* ── Sifat note ── */
+  .sifat-note { background: rgba(124,58,237,0.08); border-left-color: #7c3aed; color: rgba(200,208,240,0.85); }
+  .sifat-note strong { color: #a78bfa; }
+
+  /* ── Tags ── */
+  .tag-diff.easy   { background: rgba(16,185,129,0.14); color: #6ee7b7; border-color: rgba(16,185,129,0.4); }
+  .tag-diff.medium { background: rgba(245,158,11,0.14); color: #fbbf24; border-color: rgba(245,158,11,0.4); }
+  .tag-diff.hard   { background: rgba(244,63,94,0.14);  color: #fda4af; border-color: rgba(244,63,94,0.4); }
+
+  /* ── Lr tiles ── */
+  .lr-tile { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); }
+  .lr-tile:hover { background: rgba(124,58,237,0.1); border-color: rgba(124,58,237,0.3); }
+  .lr-param { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); }
+
+  /* ── Wrong list ── */
+  .wrong-item { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.08); }
+  .wrong-head:hover { background: rgba(255,255,255,0.05); }
+
+  /* ── Sub items ── */
+  .sub-item { border-top-color: rgba(255,255,255,0.05); }
+
+  /* ── Q paragraph ── */
+  .q-paragraph {
+    background: rgba(255,255,255,0.03);
+    border-color: rgba(255,255,255,0.06);
+    color: rgba(200,208,240,0.9);
+  }
+
+  /* ── Misc panels ── */
+  .last-score { background: rgba(124,58,237,0.1); border-color: rgba(124,58,237,0.3); border-style: solid; }
+  .auto-advance { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); }
+  .qm-exit { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); color: rgba(200,208,240,0.6); }
+  .qm-exit:hover { color: #f43f5e; border-color: rgba(244,63,94,0.32); }
+  .fs-hero { background: rgba(124,58,237,0.08); border-color: rgba(124,58,237,0.22); }
+  .fs-row { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.07); }
+  .mod-badge { background: rgba(255,255,255,0.06); color: rgba(200,208,240,0.6); }
+  .mod-card.done .mod-badge { background: rgba(16,185,129,0.16); color: #6ee7b7; }
+
+  /* ── Text colour fixes ── */
+  .display, .q-text, .hub-title, .section-head h2,
+  .verdict-title, .topic-title, .sifat-name, .sub-key,
+  .mod-label, .panel h3, .lr-score-num, .lr-tile-label,
+  .lr-param-v, .qm-label, .fs-hero-big, .score-num .big { color: #f1f5ff; }
+
+  .lede, .verdict-sub, .hub-sub, .lr-sub-text, .lr-tile-meta,
+  .meta-tile .s, .meta-tile .k, .topic-body, .sifat-def,
+  .mod-sub, .hub-progress-text, .aa-label, .fs-hero-pct,
+  .section-head .crumb, .topbar-label, .wrong-head .wh-meta,
+  .wrong-body-inner, .fs-score, .cr-score, .lr-level-cap,
+  .lr-score-cap, .aa-hint { color: rgba(200,208,240,0.55); }
+
+  .display em, .hub-title em, .section-head h2 em,
+  .verdict-tag, .hub-progress-text span, .lr-level,
+  .mod-cta, .fs-hero-pct span { color: #a78bfa; }
+
+  .topic-body strong, .topic-body .kw,
+  .sifat-note strong { color: #a78bfa; }
+  .topic-body li::before { color: #7c3aed; }
+
+  .wrong-body-inner .your { color: #f43f5e; }
+  .wrong-body-inner .right { color: #10b981; }
+  .wrong-body-inner .lbl { color: rgba(200,208,240,0.4); }
+
+  .brand-sub { color: rgba(200,208,240,0.35); border-left-color: rgba(255,255,255,0.1); }
+  .topbar-label .dot { background: #7c3aed; }
+  .foot { color: rgba(200,208,240,0.22); }
+  .score-num .pct, .score-num .big .of { color: rgba(200,208,240,0.45); }
+  .mod-num { color: rgba(200,208,240,0.28); }
+  .mod-card.done .mod-num { color: #10b981; }
+  .topic-num { color: rgba(200,208,240,0.4); }
+  .topic-glyph { color: #f59e0b; border-color: rgba(245,158,11,0.32); }
+  .aa-count { color: #a78bfa; }
+  .hint-head { color: #fbbf24; }
+  .hint-body { color: rgba(200,208,240,0.9); }
+  .lr-arrow { color: #7c3aed; }
+  .hint-count { background: rgba(255,255,255,0.08); }
+
+  /* ── Scrollbar ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
+  ::-webkit-scrollbar-thumb { background: rgba(124,58,237,0.45); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(124,58,237,0.7); }
+
+  /* ── Neon glow animation ── */
+  @keyframes neonPulse {
+    0%,100% { box-shadow: 0 0 0 3px rgba(124,58,237,0.2), 0 0 18px rgba(124,58,237,0.4); }
+    50%      { box-shadow: 0 0 0 3px rgba(124,58,237,0.38), 0 0 36px rgba(124,58,237,0.65); }
+  }
+
+  /* ── Button ripple ── */
+  .btn-accent:active::after {
+    content: "";
+    position: absolute; width: 100%; height: 100%; top: 0; left: 0;
+    background: rgba(255,255,255,0.18);
+    border-radius: inherit;
+    animation: btnRipple 0.45s ease-out forwards;
+    pointer-events: none;
+  }
+  @keyframes btnRipple {
+    from { transform: scale(0); opacity: 0.5; }
+    to   { transform: scale(2.8); opacity: 0; }
+  }
+
+  /* ── Screen enter ── */
+  @keyframes enter {
+    from { opacity: 0; transform: translateY(18px) scale(0.99); }
+    to   { opacity: 1; transform: translateY(0)   scale(1); }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-mark">S</div>
+      <div>
+        <div class="brand-name">Soru<span class="brand-sub">TYT Hazırlık</span></div>
+      </div>
+    </div>
+    <div class="topbar-label" id="topbar-label"><span class="dot"></span>Bilgi ve İnanç</div>
+  </div>
+</header>
+
+<main class="shell">
+
+  <!-- ===================== SCREEN 1: WELCOME ===================== -->
+  <section class="screen active" id="screen-welcome">
+    <div class="welcome-card">
+      <div class="eyebrow">1. Ünite · TYT Din Kültürü</div>
+      <h1 class="display">Bilgi ve <em>İnanç</em></h1>
+      <p class="lede">
+        100 paragraflı soru · 10 modül · adaptif zorluk. Önce tanı testiyle seviyeni belirle, sonra altı konuyu birer birer çalış. Her konunun ardından 10 soruluk test seni ölçer. Sonunda iki karma test ve final tarama.
+      </p>
+
+      <div class="last-score show" id="w-returning" style="display:none">
+        <span>Devam ediyorsun:</span>
+        <span class="ls-num"><span id="w-returning-level">—</span></span>
+        <span style="color: var(--muted);">·</span>
+        <span class="ls-num"><span id="w-returning-progress">—</span></span>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-tile">
+          <div class="k">01 · Önce</div>
+          <div class="v">Tanı Testi</div>
+          <div class="s">10 karma soru · seviyeni belirler</div>
+        </div>
+        <div class="meta-tile">
+          <div class="k">02 · Sonra</div>
+          <div class="v">6 Konu Modülü</div>
+          <div class="s">özet + 10 soruluk test</div>
+        </div>
+        <div class="meta-tile">
+          <div class="k">03 · Bitiş</div>
+          <div class="v">Karma & Final</div>
+          <div class="s">3 sentez testi · 30 soru</div>
+        </div>
+      </div>
+
+      <button class="btn btn-accent btn-full" onclick="welcomeStart()">
+        Çalışmaya Başla
+        <span aria-hidden="true">→</span>
+      </button>
+
+      <button class="btn-text-reset" onclick="resetProgress()" id="w-reset-btn">İlerlemeyi sıfırla</button>
+    </div>
+  </section>
+
+  <!-- ===================== SCREEN 2: DIAGNOSTIC INTRO ===================== -->
+  <section class="screen" id="screen-diagnostic-intro">
+    <div class="welcome-card">
+      <div class="eyebrow">Aşama 01 · Tanı Testi</div>
+      <h1 class="display">Önce <em>seviyeni</em> belirleyelim</h1>
+      <p class="lede">
+        Üniteyi 10 karma soruyla tarayacağız. Soruları doğru bilmenden çok, kavramlarla ne kadar rahat olduğun önemli. Sonuca göre çalışma programının zorluğu üç farklı seviyeye göre ayarlanır.
+      </p>
+
+      <div class="lr-grid">
+        <div class="lr-tile">
+          <div class="lr-tile-pin" style="background:#5B8C5A"></div>
+          <div class="lr-tile-label">Başlangıç</div>
+          <div class="lr-tile-meta">0–3 doğru · 7 ipucu · 12s geçiş · kolaydan zora</div>
+        </div>
+        <div class="lr-tile">
+          <div class="lr-tile-pin" style="background:#D97D54"></div>
+          <div class="lr-tile-label">Orta</div>
+          <div class="lr-tile-meta">4–6 doğru · 5 ipucu · 10s geçiş · karışık</div>
+        </div>
+        <div class="lr-tile">
+          <div class="lr-tile-pin" style="background:#8B2E2E"></div>
+          <div class="lr-tile-label">İleri</div>
+          <div class="lr-tile-meta">7–10 doğru · 3 ipucu · 7s geçiş · zordan kolaya</div>
+        </div>
+      </div>
+
+      <button class="btn btn-accent btn-full" onclick="startDiagnostic()">
+        Tanı Testine Başla
+        <span aria-hidden="true">→</span>
+      </button>
+      <button class="btn btn-ghost btn-full" onclick="goTo('welcome')">← Geri</button>
+    </div>
+  </section>
+
+  <!-- ===================== SCREEN 3: LEVEL REVEAL ===================== -->
+  <section class="screen" id="screen-level-reveal">
+    <div class="welcome-card lr-card">
+      <div class="eyebrow">Tanı Testi Tamamlandı</div>
+      <div class="lr-result-row">
+        <div class="lr-score-block">
+          <div class="lr-score-num" id="lr-score">—</div>
+          <div class="lr-score-cap">doğru cevap</div>
+        </div>
+        <div class="lr-arrow">→</div>
+        <div class="lr-level-block">
+          <div class="lr-level-cap">SENİN SEVİYEN</div>
+          <div class="lr-level" id="lr-level">—</div>
+        </div>
+      </div>
+      <p class="lede lr-sub-text" id="lr-sub">—</p>
+
+      <div class="lr-params">
+        <div class="lr-param">
+          <div class="lr-param-k">İpucu Hakkı</div>
+          <div class="lr-param-v" id="lr-hints">—</div>
+        </div>
+        <div class="lr-param">
+          <div class="lr-param-k">Geçiş Süresi</div>
+          <div class="lr-param-v" id="lr-auto">—</div>
+        </div>
+        <div class="lr-param">
+          <div class="lr-param-k">Zorluk Sırası</div>
+          <div class="lr-param-v" id="lr-order">—</div>
+        </div>
+      </div>
+
+      <button class="btn btn-accent btn-full" onclick="returnToHub()">
+        Çalışma Programını Aç
+        <span aria-hidden="true">→</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ===================== SCREEN 4: HUB ===================== -->
+  <section class="screen" id="screen-hub">
+    <div class="hub-header">
+      <div>
+        <div class="eyebrow">Çalışma Programı</div>
+        <h2 class="hub-title">Bilgi ve <em>İnanç</em></h2>
+        <p class="hub-sub" id="hub-level-sub">—</p>
+      </div>
+      <div class="hub-level-chip" id="hub-level-tag">—</div>
+    </div>
+
+    <div class="hub-progress-bar">
+      <div class="hub-progress-track"><div class="hub-progress-fill" id="hub-progress-fill"></div></div>
+      <div class="hub-progress-text"><span id="hub-progress">0 / 10</span> modül tamamlandı</div>
+    </div>
+
+    <div class="hub-modules" id="hub-modules"></div>
+
+    <div class="hub-footer">
+      <button class="btn btn-ghost" onclick="goTo('welcome')">← Karşılamaya Dön</button>
+      <button class="btn btn-ghost" onclick="resetProgress()">İlerlemeyi sıfırla</button>
+    </div>
+  </section>
+
+  <!-- ===================== SCREEN 5: SUMMARY (single topic) ===================== -->
+  <section class="screen" id="screen-summary">
+    <div class="section-head">
+      <h2>Konu <em>Özeti</em></h2>
+      <span class="crumb" id="summary-module-label">—</span>
+    </div>
+    <div id="topics-mount"></div>
+
+    <div class="summary-cta">
+      <button class="btn btn-accent btn-full" onclick="startQuizForModule(app.currentModuleId)">
+        Konuyu Anladım — 10 Soruluk Teste Geç
+        <span aria-hidden="true">→</span>
+      </button>
+      <button class="btn btn-ghost btn-full" onclick="returnToHub()">← Hub'a Dön</button>
+    </div>
+  </section>
+
+  <!-- ===================== SCREEN 6: QUIZ ===================== -->
+  <section class="screen" id="screen-quiz">
+    <div class="quiz-module-strip">
+      <div class="qm-label" id="quiz-module-label">—</div>
+      <button class="qm-exit" onclick="if(confirm('Modülden çıkmak istiyor musun? İlerleme kaydedilmez.')) { clearInterval(timerInt); stopAutoAdvance(); returnToHub(); }">↩ Hub</button>
+    </div>
+    <div class="quiz-bar">
+      <div class="q-counter">Soru <span id="q-cur">1</span><span class="q-total"> / <span id="q-tot">10</span></span></div>
+      <div class="progress-wrap">
+        <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+      </div>
+      <div class="timer" id="timer">⏱ 00:00</div>
+    </div>
+    <div class="dots-row" id="dots-row"></div>
+
+    <div id="q-mount"></div>
+
+    <div class="quiz-foot">
+      <button class="hint-btn" id="hint-btn" onclick="useHint()">
+        <span>💡</span>
+        <span>İpucu</span>
+        <span class="hint-count" id="hint-count">5</span>
+      </button>
+      <button class="btn btn-accent" id="next-btn" disabled onclick="nextQuestion()">
+        Sonraki Soru
+        <span aria-hidden="true">→</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ===================== SCREEN 7: MODULE RESULT ===================== -->
+  <section class="screen" id="screen-result">
+    <div class="res-module-strip">
+      <span class="qm-label" id="res-module-label">—</span>
+      <span class="verdict-tag" id="verdict-tag">—</span>
+    </div>
+
+    <div class="results-hero">
+      <div class="score-ring">
+        <svg width="180" height="180" viewBox="0 0 180 180">
+          <circle class="track" cx="90" cy="90" r="78" fill="none" stroke-width="10"/>
+          <circle class="fill"  cx="90" cy="90" r="78" fill="none" stroke-width="10"
+                  stroke-dasharray="490" stroke-dashoffset="490" id="ring-fill"/>
+        </svg>
+        <div class="score-num">
+          <div class="big"><span id="res-score">0</span><span class="of" id="res-of"> / 10</span></div>
+          <div class="pct" id="res-pct">0%</div>
+        </div>
+      </div>
+      <div class="verdict">
+        <h2 class="verdict-title" id="verdict-title">—</h2>
+        <p class="verdict-sub" id="verdict-sub">—</p>
+      </div>
+    </div>
+
+    <div class="panel" id="wrong-panel">
+      <h3>Yanlış Cevaplar</h3>
+      <div class="wrong-list" id="wrong-list"></div>
+    </div>
+
+    <div class="results-actions">
+      <button class="btn btn-ghost btn-full" onclick="returnToHub()">↩ Hub</button>
+      <button class="btn btn-ghost btn-full" onclick="retryModule()">↻ Tekrar</button>
+      <button class="btn btn-accent btn-full" id="res-cta-next" onclick="goNextModule()">Sıradaki Modül →</button>
+      <button class="btn btn-accent btn-full" id="res-cta-final" style="display:none" onclick="showFinalSummary()">🏆 Tüm Sonuçlar →</button>
+    </div>
+  </section>
+
+  <!-- ===================== SCREEN 8: FINAL SUMMARY ===================== -->
+  <section class="screen" id="screen-final">
+    <div class="welcome-card">
+      <div class="eyebrow">🏆 Üniteyi Tamamladın</div>
+      <h1 class="display">100 Soru · <em>Tamam</em></h1>
+      <p class="lede">İşte ünite genelindeki performansın. Her modülün kendi başarı oranını aşağıda görebilirsin.</p>
+
+      <div class="fs-hero">
+        <div class="fs-hero-big"><span id="fs-total">—</span></div>
+        <div class="fs-hero-pct"><span id="fs-pct">—</span> toplam başarı</div>
+      </div>
+
+      <div class="fs-rows" id="fs-modules"></div>
+
+      <div class="results-actions">
+        <button class="btn btn-ghost btn-full" onclick="returnToHub()">↩ Hub</button>
+        <button class="btn btn-accent btn-full" onclick="resetProgress()">🔄 Yeniden Başla</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot"><footer class="foot">
+  SORU · TYT HAZIRLIK · 1. ÜNİTE — BİLGİ VE İNANÇ
+</footer>
+
+<canvas id="confetti"></canvas>
+
+<script src="questions-data.js"></script>
+<script>
+/* ============ DATA — TOPIC SUMMARIES ============ */
+const TOPICS = [
+  {
+    num: "1.1",
+    glyph: "EPISTEME",
+    title: "Bilgi ve Bilgi Kaynakları",
+    body: `
+      <p class="lead">
+        <strong>Bilgi (ilim, ma'rifet)</strong>, gerçekliğin zihinsel kavranışıdır. TDK'ya göre bilgi: "Öğrenme, gözlem ve araştırma yoluyla elde edilen, akıl yoluyla doğruluğu kavranan gerçeklerin bütünü." İslam düşüncesinde bilgi yalnızca teorik bir kazanım değil; insanı <strong>hakikate, imana ve ahlaki erdeme</strong> ulaştıran nihai değerdir. Bu yüzden Kur'an "Hiç bilenlerle bilmeyenler bir olur mu?" (Zümer 39/9) diye sorar.
+      </p>
+
+      <p>İlk inen ayetler bile bilgiye doğrudan vurgu yapar: <em>"Yaratan Rabbinin adıyla oku"</em> (Alak 96/1) ve <em>"İnsana bilmediğini öğreten Allah'tır"</em> (Alak 96/5). Bu açılış ayetleri, İslam'ın bilgi anlayışının temel zeminini koyar: bilgi <strong>ilahi kaynaklıdır</strong>, fakat insanın çabasıyla edinilir.</p>
+
+      <p style="margin: 22px 0 10px;"><strong>Bilgi Türleri:</strong></p>
+      <div class="sub-list">
+        <div class="sub-item">
+          <div class="sub-key">Dini Bilgi</div>
+          <div class="sub-val">Vahiy ve sahih nakil kaynaklı bilgi: akaid, ibadet, ahlak. Bağlayıcı ve mutlak nitelikte.</div>
+        </div>
+        <div class="sub-item">
+          <div class="sub-key">Tecrübi / Dünyevi Bilgi</div>
+          <div class="sub-val">Akıl, deney ve gözlemle elde edilen bilgi: bilim, tarih, sosyal disiplinler. Sürekli güncellenen alan.</div>
+        </div>
+        <div class="sub-item">
+          <div class="sub-key">Sezgisel Bilgi</div>
+          <div class="sub-val">İçten gelen kavrayış (ilham, keşif). Kişisel düzeyde anlamlıdır; bağımsız delil değildir.</div>
+        </div>
+      </div>
+
+      <p style="margin: 22px 0 10px;"><strong>İslam Epistemolojisinde Üç Temel Bilgi Kaynağı:</strong></p>
+
+      <div class="sifat-group">
+        <div class="sifat-head">
+          <span class="sifat-tag">Üç Temel Kaynak</span>
+          <span class="sifat-sub">Akıl · Duyular · Sadık Haber — birbirini bütünleyen bilgi yolları</span>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">1. Selim Akıl <span class="sifat-tr">— Sağlıklı, önyargısız akıl</span></div>
+          <div class="sifat-def">
+            "Selim" sözlükte "sağlam, kusursuz" demektir. Selim akıl; önyargı, çıkar ve duygu baskısından arınmış, delili tartabilen ve mantıksal sonuçlara ulaşabilen akıldır. İslam düşünürlerine göre <strong>vahyin doğru anlaşılması</strong> da selim akla bağlıdır; bozulmuş bir akıl, nasları yanlış yorumlar.
+          </div>
+          <div class="sifat-ayet">"Hiç akıl erdirmez misiniz?" <cite>— Yâsîn 36/62</cite></div>
+          <div class="sifat-ayet">"De ki: Hiç bilenlerle bilmeyenler bir olur mu?" <cite>— Zümer 39/9</cite></div>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">2. Salim Duyular <span class="sifat-tr">— Sağlıklı işleyen beş duyu</span></div>
+          <div class="sifat-def">
+            Görme, işitme, dokunma, koku, tat — bu beş duyu ile edinilen doğrulanabilir gözlem bilgisi. Bilginin <strong>deneysel boyutunu</strong> oluşturur ve modern bilimle uyumludur. Duyular yanılabilir (suyun içinde kırık gibi görünen kalem örneği); bu yüzden akıl ve diğer kaynaklarla denetlenmesi gerekir.
+          </div>
+          <div class="sifat-ayet">"Size işitme, görme ve kalpler (gönüller) verdik; umulur ki şükredersiniz." <cite>— Nahl 16/78</cite></div>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">3. Sadık Haber <span class="sifat-tr">— Doğruluğundan emin olunan haber</span></div>
+          <div class="sifat-def">
+            Güvenilir kaynaktan gelen, kontrol edilebilir nitelikteki haberdir. İki alt türü vardır:
+          </div>
+          <div class="sub-list" style="margin-top: 10px;">
+            <div class="sub-item">
+              <div class="sub-key">Mütevatir Haber</div>
+              <div class="sub-val">Her tabakada yalan üzerinde birleşmesi imkânsız bir topluluğun naklettiği, kesinlik (yakîn) ifade eden haber. Akıl yürütme dahi gerektirmez.</div>
+            </div>
+            <div class="sub-item">
+              <div class="sub-key">Haber-i Vahid</div>
+              <div class="sub-val">Tek ya da sınırlı sayıda râvinin naklettiği haber. Kesinlik değil zan ifade eder; araştırma gerektirir.</div>
+            </div>
+          </div>
+          <div class="sifat-ayet">"Ey iman edenler! Eğer bir fâsık size bir haber getirirse, doğruluğunu araştırın." <cite>— Hucurât 49/6</cite></div>
+        </div>
+      </div>
+
+      <p style="margin: 22px 0 10px;"><strong>Bağımsız Bilgi Kaynağı Sayılmayanlar:</strong></p>
+      <div class="sifat-group">
+        <div class="sifat-head">
+          <span class="sifat-tag alt">Sınırlı Yollar</span>
+          <span class="sifat-sub">Sahibi için anlamlı, herkes için bağlayıcı değil</span>
+        </div>
+        <div class="sifat">
+          <div class="sifat-name">Rüya</div>
+          <div class="sifat-def">Subjektif ve kişisel deneyim. Peygamber rüyaları vahiy niteliği taşıyabilir (Sâffât 102'de Hz. İbrahim örneği), ancak sıradan müminin rüyası nefis ya da başka etkilerden de kaynaklanabileceği için bağımsız bilgi kaynağı sayılmaz.</div>
+        </div>
+        <div class="sifat">
+          <div class="sifat-name">Keşif</div>
+          <div class="sifat-def">Tasavvuf geleneğinde ruhun perdeleri kaldırarak hakikati doğrudan sezmesi. Kişisel manevi tecrübedir; başkaları için bağlayıcı bilgi değildir.</div>
+        </div>
+        <div class="sifat">
+          <div class="sifat-name">İlham</div>
+          <div class="sifat-def">Allah'ın kalbe doğurması olarak tanımlanır. Hz. Meryem'e ve Hz. Musa'nın annesine geldiği rivayet edilir. Ancak hüküm kaynağı değildir; vahiyle karıştırılmamalıdır.</div>
+        </div>
+      </div>
+
+      <div class="sifat-note">
+        <strong>Akademik özet:</strong> İslam epistemolojisi <em>çok kaynaklı</em> ve <em>tamamlayıcı</em> bir yapıdır. Akıl tek başına gayb konularını, duyular tek başına metafizik konuları, haber tek başına evren kanunlarını çözemez. Üç kaynağın <span class="kw">uyumlu işleyişi</span> bilgiye güvenli yoldur. Modern bilim felsefesindeki "doğrulanabilirlik" ve "tekrar edilebilirlik" ilkeleri de bu yapıyla uyumludur.
+      </div>
+    `
+  },
+  {
+    num: "1.2",
+    glyph: "TEVHID",
+    title: "İman ve Allah'ın Sıfatları",
+    body: `
+      <p class="lead"><strong>İman:</strong> Allah'ın varlığına ve birliğine, Hz. Muhammed'in elçiliğine <span class="kw">kalben tasdik</span> etmek ve <span class="kw">dille ikrar</span> etmektir.</p>
+
+      <p>İmanın altı şartı: Allah'a, meleklerine, kitaplarına, peygamberlerine, ahiret gününe, kadere iman.</p>
+
+      <p><strong>İman-Amel İlişkisi:</strong> Amel, imanın <em>parçası değil sonucudur.</em> Gerçek iman davranışa yansır.</p>
+
+      <div class="ayet">Göklerin ve yerin yaratılışında akıl sahipleri için ibretler vardır. <cite>— Âl-i İmrân 3/190</cite></div>
+
+      <p><strong>Esmâü'l-Hüsnâ:</strong> Allah'ın en güzel isimleri. Er-Rahmân, El-Alîm, El-Hâlık, El-Adl…</p>
+
+      <p style="margin: 22px 0 10px;"><strong>Allah'ın Sıfatları — İki Ana Grup:</strong></p>
+
+      <div class="sifat-group">
+        <div class="sifat-head">
+          <span class="sifat-tag">A · Zâtî Sıfatlar</span>
+          <span class="sifat-sub">Yalnızca Allah'a ait · başka varlıkta eksiği bile bulunmaz</span>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">Vücud <span class="sifat-tr">— Var olmak</span></div>
+          <div class="sifat-def">Allah vardır; yokluğu düşünülemez.</div>
+          <div class="sifat-ayet">"Hamd, gökleri ve yeri yaratan, karanlıkları ve aydınlığı var eden Allah'a mahsustur." <cite>— En'âm 6/1</cite></div>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">Kıdem <span class="sifat-tr">— Başlangıcı olmamak (ezelîlik)</span></div>
+          <div class="sifat-def">Allah ezelîdir; varlığının bir başlangıcı yoktur.</div>
+          <div class="sifat-ayet">"O, evveldir, âhirdir, zâhirdir, bâtındır. O, her şeyi hakkıyla bilendir." <cite>— Hadîd 57/3</cite></div>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">Beka <span class="sifat-tr">— Sonu olmamak (ebedîlik)</span></div>
+          <div class="sifat-def">Allah'ın varlığının bir sonu yoktur.</div>
+          <div class="sifat-ayet">"Yeryüzünde bulunan her canlı yok olacak. Ancak azamet ve ikram sahibi Rabbinin zâtı bâki kalacaktır." <cite>— Rahmân 55/26-27</cite></div>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">Vahdaniyet <span class="sifat-tr">— Bir olmak (tevhid)</span></div>
+          <div class="sifat-def">Allah birdir, ortağı ve benzeri yoktur.</div>
+          <div class="sifat-ayet">"De ki: O Allah birdir. Allah, samed (hiçbir şeye muhtaç değil, her şey kendisine muhtaç)dır." <cite>— İhlâs 112/1-2</cite></div>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">Muhalefetün lil-havâdis <span class="sifat-tr">— Yaratılmışlara benzememek</span></div>
+          <div class="sifat-def">Allah hiçbir yaratılmışa benzemez; nitelikleri kıyaslanamaz.</div>
+          <div class="sifat-ayet">"O'nun benzeri hiçbir şey yoktur. O, her şeyi işiten ve görendir." <cite>— Şûrâ 42/11</cite></div>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">Kıyâm bi-nefsihî <span class="sifat-tr">— Varlığında başkasına muhtaç olmamak</span></div>
+          <div class="sifat-def">Allah, var olmak için hiçbir şeye ihtiyaç duymaz; kendi kendine kâimdir.</div>
+          <div class="sifat-ayet">"Şüphesiz Allah, âlemlerden müstağnidir (hiçbir şeye muhtaç değildir)." <cite>— Ankebût 29/6</cite></div>
+        </div>
+      </div>
+
+      <div class="sifat-group">
+        <div class="sifat-head">
+          <span class="sifat-tag alt">B · Subûtî Sıfatlar</span>
+          <span class="sifat-sub">Allah'ın fiil ve eylemlerini bildirir · yaratılmışlarda sınırlı/eksik biçimi bulunabilir</span>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">Hayat <span class="sifat-tr">— Diri olmak</span></div>
+          <div class="sifat-def">Allah ezelî ve ebedî hayat sahibidir; ölüm O'na ulaşmaz.</div>
+          <div class="sifat-ayet">"Allah, kendisinden başka hiçbir ilah olmayandır. Diridir (Hayy), kayyûmdur…" <cite>— Bakara 2/255 (Âyetü'l-Kürsî)</cite></div>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">İlim <span class="sifat-tr">— Bilmek</span></div>
+          <div class="sifat-def">Allah her şeyi bilir; gizli-açık, geçmiş-gelecek O'nun ilmindedir.</div>
+          <div class="sifat-ayet">"Gaybın anahtarları yalnızca O'nun katındadır. Onları ancak O bilir." <cite>— En'âm 6/59</cite></div>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">Semî' <span class="sifat-tr">— İşitmek</span></div>
+          <div class="sifat-def">Allah her sesi, her fısıltıyı işitir.</div>
+          <div class="sifat-ayet">"Şüphesiz Allah, her şeyi hakkıyla işitendir, hakkıyla görendir." <cite>— Nisâ 4/58</cite></div>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">Basar <span class="sifat-tr">— Görmek</span></div>
+          <div class="sifat-def">Allah her şeyi görür; karanlık ve uzaklık O'na engel değildir.</div>
+          <div class="sifat-ayet">"Allah, yaptıklarınızı görmektedir." <cite>— Bakara 2/265</cite></div>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">İrade <span class="sifat-tr">— Dilemek</span></div>
+          <div class="sifat-def">Allah dilediğini yapar; iradesi mutlaktır.</div>
+          <div class="sifat-ayet">"Bir şeyin olmasını dilediğimizde sözümüz ona ancak 'Ol!' dememizdir. O da hemen oluverir." <cite>— Nahl 16/40</cite></div>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">Kudret <span class="sifat-tr">— Güç yetirmek</span></div>
+          <div class="sifat-def">Allah'ın gücü her şeye yeter; aciz kalacağı bir şey yoktur.</div>
+          <div class="sifat-ayet">"Şüphesiz Allah'ın gücü her şeye hakkıyla yeter." <cite>— Bakara 2/20</cite></div>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">Kelâm <span class="sifat-tr">— Konuşmak</span></div>
+          <div class="sifat-def">Allah konuşur; vahiy bu sıfatın bir tezahürüdür.</div>
+          <div class="sifat-ayet">"Allah, Mûsâ ile gerçekten konuştu." <cite>— Nisâ 4/164</cite></div>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">Tekvîn <span class="sifat-tr">— Yaratmak</span></div>
+          <div class="sifat-def">Allah'ın yoktan var etme fiilidir. Yaratma, rızık verme, öldürme gibi fiillerin tamamını kapsar.</div>
+          <div class="sifat-ayet">"O, gökleri ve yeri yoktan yaratandır…" <cite>— En'âm 6/101</cite></div>
+        </div>
+      </div>
+
+      <div class="sifat-note">
+        <strong>Ayırt etme ipucu:</strong> Bir sıfatın <em>eksik bir biçimi insanda da var mı?</em>
+        <span class="kw">Hayır</span> ise → Zâtî · <span class="kw">Evet</span> ise → Subûtî.
+        (Sınav klasiği: <strong>Tekvîn = Subûtî</strong>; çünkü "yaratma" bir fiildir, Zât'ın özelliği değildir.)
+      </div>
+    `
+  },
+  {
+    num: "1.3",
+    glyph: "MELAIKE",
+    title: "Meleklere İman",
+    body: `
+      <p class="lead">
+        <strong>Melekler (melâike)</strong>, Allah'ın <span class="kw">nurdan</span> yarattığı, cinsiyetsiz, görünmez ve özgür iradeden yoksun varlıklardır. Allah'a sürekli kulluk eder, emrettiklerinden bir an dahi sapmazlar. Meleklere iman, imanın altı şartından biridir ve <strong>vahyin bize ulaşmasının</strong> ön kabulüdür.
+      </p>
+
+      <div class="ayet">Onlar, Allah'ın emrettiklerinde Allah'a isyan etmezler; kendilerine emredilen şeyleri yaparlar. <cite>— Tahrîm 66/6</cite></div>
+
+      <p style="margin: 22px 0 10px;"><strong>Meleklerin Mahiyeti — Temel Özellikleri:</strong></p>
+      <div class="sub-list">
+        <div class="sub-item">
+          <div class="sub-key">Yaratılış</div>
+          <div class="sub-val">Nurdan yaratılmışlardır (Buhârî). Maddi bedenleri yoktur, fakat çeşitli sûretlere bürünebilirler.</div>
+        </div>
+        <div class="sub-item">
+          <div class="sub-key">İrade</div>
+          <div class="sub-val">İnsan gibi özgür iradeleri yoktur; Allah'ın emrini tam itaatle yerine getirirler.</div>
+        </div>
+        <div class="sub-item">
+          <div class="sub-key">Cinsiyet ve İhtiyaçlar</div>
+          <div class="sub-val">Cinsiyetleri yoktur; yemez, içmez, uyumaz, yorulmazlar.</div>
+        </div>
+        <div class="sub-item">
+          <div class="sub-key">Günah</div>
+          <div class="sub-val">Günah işlemezler; isyan etmezler. Allah'ın emrettiklerini eksiksiz yerine getirirler.</div>
+        </div>
+        <div class="sub-item">
+          <div class="sub-key">Sayı</div>
+          <div class="sub-val">Sayıları çoktur; tam sayısını yalnızca Allah bilir (Müddessir 74/31).</div>
+        </div>
+      </div>
+
+      <div class="sifat-note" style="margin: 18px 0;">
+        <strong>Melek ve cin farkı:</strong> Melekler nurdan yaratılır, günah işlemez; cinler ateşten yaratılır ve insanlar gibi imtihana tabidir, iyilik veya kötülük seçebilirler. <span class="kw">Şeytan (İblis) cin sınıfındandır</span>, melek değildir (Kehf 18/50). Bu yüzden İblis'in Allah'a isyanı, meleklerin günahsızlığıyla çelişmez.
+      </div>
+
+      <p style="margin: 22px 0 10px;"><strong>Dört Büyük Melek (Mukarrebûn):</strong></p>
+
+      <div class="sifat-group">
+        <div class="sifat-head">
+          <span class="sifat-tag">Vahiy ve Kainat</span>
+          <span class="sifat-sub">Allah'ın evrendeki düzeninde dört kilit vazifeli</span>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">Cebrail (Cibrîl) <span class="sifat-tr">— Vahyi peygamberlere ulaştırmak</span></div>
+          <div class="sifat-def">Tüm peygamberlere vahyin iletilmesinde görevli melektir. Kur'an'da "Rûhu'l-Kudüs" ve "Rûhu'l-Emîn" olarak da anılır. Vahiy zincirinin Allah ile peygamber arasındaki aracısıdır.</div>
+          <div class="sifat-ayet">"Onu Rûhu'l-Emîn (Cebrail) senin kalbine indirdi." <cite>— Şuarâ 26/193-194</cite></div>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">Mikâil <span class="sifat-tr">— Tabiat olaylarını ve rızkı yönetmek</span></div>
+          <div class="sifat-def">Yağmur, rüzgâr, bitkilerin yetişmesi ve rızıkların paylaşımı gibi tabiat olaylarının ilahi düzen içinde yürütülmesinden sorumludur.</div>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">İsrafil <span class="sifat-tr">— Sûr'a üflemek (kıyamet)</span></div>
+          <div class="sifat-def">Kıyamet gününde Sûr'a iki kez üfleyecek olan melektir. İlk üflemede tüm canlılar ölecek, ikinci üflemede yeniden dirileceklerdir.</div>
+          <div class="sifat-ayet">"Sûr'a üflendiği zaman göklerde ve yerde olanlar dehşete kapılır." <cite>— Neml 27/87</cite></div>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">Azrail (Melekü'l-Mevt) <span class="sifat-tr">— Can almak</span></div>
+          <div class="sifat-def">Vakti gelen canlıların ruhlarını almakla görevli melektir. Kur'an'da "Melekü'l-Mevt" (ölüm meleği) olarak adlandırılır.</div>
+          <div class="sifat-ayet">"De ki: Sizin üzerinize görevlendirilen ölüm meleği canınızı alacak." <cite>— Secde 32/11</cite></div>
+        </div>
+      </div>
+
+      <p style="margin: 22px 0 10px;"><strong>Diğer Görevli Melekler:</strong></p>
+      <div class="sub-list">
+        <div class="sub-item">
+          <div class="sub-key">Kirâmen Kâtibîn</div>
+          <div class="sub-val">"Değerli yazıcılar." Her insanın sağ ve solunda bulunup iyi ve kötü amellerini eksiksiz kaydederler (İnfitâr 82/10-12).</div>
+        </div>
+        <div class="sub-item">
+          <div class="sub-key">Münker ve Nekir</div>
+          <div class="sub-val">Kabir hayatında insana üç temel soruyu soran melekler: "Rabbin kim? Dinin nedir? Peygamberin kim?"</div>
+        </div>
+        <div class="sub-item">
+          <div class="sub-key">Hamele-i Arş</div>
+          <div class="sub-val">Allah'ın arşını taşımakla görevli meleklerdir (Hâkka 69/17).</div>
+        </div>
+        <div class="sub-item">
+          <div class="sub-key">Hafaza Melekleri</div>
+          <div class="sub-val">İnsanı çeşitli zararlardan ve şer odaklarından koruyan koruyucu meleklerdir (Ra'd 13/11).</div>
+        </div>
+        <div class="sub-item">
+          <div class="sub-key">Rıdvan ve Mâlik</div>
+          <div class="sub-val">Rıdvan cennetin, Mâlik ise cehennemin görevli melekleridir.</div>
+        </div>
+      </div>
+
+      <div class="sifat-note">
+        <strong>Meleklere imanın ahlaki anlamı:</strong> Müminin sürekli "izlendiğini" bilmesi (Kirâmen Kâtibîn) onu sorumlu davranmaya yöneltir. Vahyin meleklerle ulaşması (Cebrail), nübüvvet kurumunun zincirini sağlar; bu yüzden meleklere iman dolaylı olarak <span class="kw">kitaplara ve peygamberlere</span> imanı da kapsar. İmanın altı şartı zincirleme bir bütündür — birini reddetmek diğerini de etkiler.
+      </div>
+    `
+  },
+  {
+    num: "1.4",
+    glyph: "VAHIY",
+    title: "Kitaplara İman",
+    body: `
+      <p class="lead">
+        <strong>İlahi kitap</strong>, Allah'ın peygamberleri aracılığıyla insanlığa indirdiği ve yazılı hale getirilen vahyin bütünüdür. Bu kitaplar inanç, ibadet ve ahlak konularında insanlara <span class="kw">ilahi rehberlik</span> sağlar; doğruyla yanlışı ayırır (furkân) ve hidayet sunar.
+      </p>
+
+      <p><strong>Vahiy nedir?</strong> Sözlükte "gizlice ve hızlıca bildirmek, ima etmek" anlamına gelir. Terim olarak <em>Allah'ın dilediği bilgileri seçtiği peygamberlere gizli bir yolla bildirmesi</em>dir. Vahyin kaynağı Allah'tır; insan aklının kendi başına ulaşamayacağı hakikatleri içerir.</p>
+
+      <div class="ayet">Şüphesiz biz, Nûh'a ve ondan sonra gelen peygamberlere vahyettiğimiz gibi sana da vahyettik. <cite>— Nisâ 4/163</cite></div>
+
+      <p style="margin: 22px 0 10px;"><strong>Vahyin Geliş Biçimleri</strong> (Şûrâ 42/51):</p>
+      <div class="sub-list">
+        <div class="sub-item">
+          <div class="sub-key">Doğrudan Kalbe İlkâ</div>
+          <div class="sub-val">Allah'ın peygamberin kalbine bir bilgiyi doğrudan ilham etmesi.</div>
+        </div>
+        <div class="sub-item">
+          <div class="sub-key">Perde Arkasından Konuşma</div>
+          <div class="sub-val">Hz. Musa'ya Tûr Dağı'nda hitap edildiği gibi (Nisâ 4/164).</div>
+        </div>
+        <div class="sub-item">
+          <div class="sub-key">Melek Aracılığıyla</div>
+          <div class="sub-val">Cebrail aracılığıyla. Kur'an'ın indirilişinde en yaygın yöntem budur.</div>
+        </div>
+      </div>
+
+      <p style="margin: 22px 0 10px;"><strong>Dört Büyük İlahi Kitap (Kütüb-i Erbaa):</strong></p>
+
+      <div class="sifat-group">
+        <div class="sifat-head">
+          <span class="sifat-tag">Kütüb-i Erbaa</span>
+          <span class="sifat-sub">Dört büyük ilahi kitap — tarih sırasıyla</span>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">Tevrat <span class="sifat-tr">— Hz. Musa'ya</span></div>
+          <div class="sifat-def">İsrailoğullarına gönderilmiş ilahi kitaptır. "Şeriat, kanun" anlamı taşır. Tarih içinde tahrif edilmiştir; günümüzdeki Tevrat orijinal nüsha değildir.</div>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">Zebur <span class="sifat-tr">— Hz. Davud'a</span></div>
+          <div class="sifat-def">Hz. Davud'a vahiyle indirilmiş, ilahiler (mezmurlar) ve hikmetler içeren kitap. Yeni şer'î hüküm getirmemiş, Tevrat'ın hükümlerini tasdik etmiştir.</div>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">İncil <span class="sifat-tr">— Hz. İsa'ya</span></div>
+          <div class="sifat-def">"Müjde" anlamına gelir. Hz. İsa'ya indirilmiştir; merhamet, sevgi ve manevi derinlik vurgusu öne çıkar. Tarih içinde tahrif edilmiştir; günümüzde dört farklı versiyonu mevcuttur.</div>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">Kur'an-ı Kerim <span class="sifat-tr">— Hz. Muhammed (s.a.v.)'e</span></div>
+          <div class="sifat-def">Son ilahi kitaptır. 23 yıl boyunca tedrici olarak indirilmiş, sahabe tarafından ezberlenmiş ve yazılı olarak kayıt altına alınmıştır. <strong>Allah tarafından korunmuş ve tahrif edilmemiştir</strong>; bu özelliği diğer ilahi kitaplardan ayırır.</div>
+          <div class="sifat-ayet">"Şüphesiz o Zikr'i (Kur'an'ı) biz indirdik biz; onun koruyucusu da elbette biziz." <cite>— Hicr 15/9</cite></div>
+        </div>
+      </div>
+
+      <p style="margin: 22px 0 10px;"><strong>Suhuf (Sahifeler) — Kitap Değil, Kısa Vahiy Sayfaları:</strong></p>
+      <p>Bazı peygamberlere kitap büyüklüğünde değil, kısa vahiy sayfaları gönderilmiştir. Toplam 100 sahife indirildiği bilinmektedir:</p>
+      <div class="sub-list">
+        <div class="sub-item"><div class="sub-key">Hz. Âdem</div><div class="sub-val">10 sahife</div></div>
+        <div class="sub-item"><div class="sub-key">Hz. Şit</div><div class="sub-val">50 sahife (en çok)</div></div>
+        <div class="sub-item"><div class="sub-key">Hz. İdris</div><div class="sub-val">30 sahife</div></div>
+        <div class="sub-item"><div class="sub-key">Hz. İbrahim</div><div class="sub-val">10 sahife</div></div>
+      </div>
+
+      <p style="margin: 22px 0 10px;"><strong>Kur'an-ı Kerim'in Ayırt Edici Özellikleri:</strong></p>
+      <div class="sub-list">
+        <div class="sub-item">
+          <div class="sub-key">Korunmuşluk</div>
+          <div class="sub-val">Allah'ın güvencesi altındadır; tahrif edilmemiştir (Hicr 9).</div>
+        </div>
+        <div class="sub-item">
+          <div class="sub-key">Evrensellik</div>
+          <div class="sub-val">Tüm insanlığa hitap eder ("Yâ eyyühe'n-nâs"); Hz. Muhammed "âlemlere rahmet" olarak gönderilmiştir (Enbiyâ 21/107).</div>
+        </div>
+        <div class="sub-item">
+          <div class="sub-key">Tedrici İniş</div>
+          <div class="sub-val">23 yıllık süre içinde kademeli olarak inmiştir; bu sayede hükümler kademeli kavranıp uygulanabilmiştir.</div>
+        </div>
+        <div class="sub-item">
+          <div class="sub-key">Bütünleyicilik</div>
+          <div class="sub-val">Önceki vahiylerin özünü tasdik eder, bozulmalarını düzeltir, eksikleri tamamlar.</div>
+        </div>
+        <div class="sub-item">
+          <div class="sub-key">Mucize Olma</div>
+          <div class="sub-val">Belagat, hüküm ve hidayet açısından eşi benzeri olmayan kalıcı bir mucizedir; tüm zamanlar için geçerlidir.</div>
+        </div>
+      </div>
+
+      <div class="sifat-note">
+        <strong>İmanın bütünlüğü:</strong> Kur'an'a iman aslında önceki ilahi kitapların özüne de iman demektir; çünkü Kur'an, kendinden öncekilerin tahrif olmamış özünü tasdik eder. Peygamberlere ve kitaplara iman birbiriyle zincirleme bağlıdır — birini reddetmek diğerini de etkiler.
+      </div>
+    `
+  },
+  {
+    num: "1.5",
+    glyph: "NUBUVVE",
+    title: "Peygamberlere İman",
+    body: `
+      <p class="lead"><strong>Nübüvvet:</strong> Allah'ın emirlerini insanlara bildirmek üzere seçtiği kullara vahiy göndermesidir. Bu görevi üstlenenlere <span class="kw">nebi</span> veya <span class="kw">rasul</span> denir.</p>
+
+      <div class="ayet">Biz her ümmete Allah'a kulluk edin diyen bir peygamber gönderdik. <cite>— Nahl 36</cite></div>
+
+      <p style="margin: 18px 0 8px;"><strong>Peygamberlerin Temel Sıfatları:</strong></p>
+      <div class="sub-list">
+        <div class="sub-item"><div class="sub-key">Sıdk</div><div class="sub-val">Doğruluk</div></div>
+        <div class="sub-item"><div class="sub-key">Emanet</div><div class="sub-val">Güvenilirlik</div></div>
+        <div class="sub-item"><div class="sub-key">Tebliğ</div><div class="sub-val">Vahyi eksiksiz iletme</div></div>
+        <div class="sub-item"><div class="sub-key">Fetanet</div><div class="sub-val">Üstün zekâ ve kavrayış</div></div>
+        <div class="sub-item"><div class="sub-key">İsmet</div><div class="sub-val">Günahsızlık (büyük günah işlemezler)</div></div>
+      </div>
+
+      <p style="margin: 18px 0 8px;">Kur'an'da <strong>25 peygamberin adı</strong> geçer. <span class="kw">Ulü'l-azm</span> peygamberler: Nuh, İbrahim, Musa, İsa, Muhammed (s.a.v.)</p>
+
+      <p style="margin: 22px 0 10px;"><strong>Peygamberlerin Dört Temel Görevi:</strong></p>
+
+      <div class="sifat-group">
+        <div class="sifat-head">
+          <span class="sifat-tag">Görevler</span>
+          <span class="sifat-sub">Vahyin teslimi · açıklanması · uygulanması · yaşanması</span>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">1. Tebliğ <span class="sifat-tr">— Bildirmek, ulaştırmak</span></div>
+          <div class="sifat-def">Allah'tan alınan vahyi <span class="kw">eksiksiz ve değiştirmeksizin</span> insanlara ulaştırmak. Peygamberliğin temel ve birincil görevidir.</div>
+          <div class="sifat-ayet">"Ey Peygamber! Rabbinden sana indirileni tebliğ et. Eğer bunu yapmazsan O'nun elçilik görevini yerine getirmemiş olursun." <cite>— Mâide 5/67</cite></div>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">2. Tebyin <span class="sifat-tr">— Açıklamak, anlaşılır kılmak</span></div>
+          <div class="sifat-def">Gelen vahyin <span class="kw">manasını açıklamak</span>, kapalı yönlerini öğretmek, hayata uyarlanır hâle getirmek. Hadis ve sünnetin temeli bu göreve dayanır.</div>
+          <div class="sifat-ayet">"Sana da bu Kur'an'ı indirdik ki, kendilerine indirileni insanlara açıklayasın; belki düşünüp anlarlar." <cite>— Nahl 16/44</cite></div>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">3. Teşrî <span class="sifat-tr">— Hüküm koymak, uygulama belirlemek</span></div>
+          <div class="sifat-def">Dini emir ve yasakların <span class="kw">uygulama şeklini</span> belirlemek; helal-haram sınırlarını açıkça çizmek. Bu görev peygambere Allah tarafından yetki olarak verilmiştir.</div>
+          <div class="sifat-ayet">"Peygamber size ne verdiyse onu alın, neyi yasakladıysa ondan kaçının. Allah'tan korkun; çünkü Allah'ın azabı şiddetlidir." <cite>— Haşr 59/7</cite></div>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">4. Temsil <span class="sifat-tr">— Yaşayarak örnek olmak</span></div>
+          <div class="sifat-def">Emirleri ve ahlaki ilkeleri <span class="kw">kendi hayatında yaşayarak</span> göstermek. Peygamber, getirdiği mesajın canlı örneğidir; sözüyle değil davranışıyla da öğretir.</div>
+          <div class="sifat-ayet">"Andolsun ki Allah'ın Resulü'nde sizin için, Allah'a ve ahiret gününe kavuşmayı umanlar ve Allah'ı çokça zikredenler için güzel bir örnek (üsve-i hasene) vardır." <cite>— Ahzâb 33/21</cite></div>
+        </div>
+      </div>
+
+      <div class="sifat-note">
+        <strong>Soru ipucu:</strong> Hangi görevin sorulduğunu ayetteki <em>fiilden</em> anlayabilirsin —
+        "<span class="kw">tebliğ et</span>" (Mâide 67) → Tebliğ; "<span class="kw">açıklayasın</span>" (Nahl 44) → Tebyin;
+        "<span class="kw">ne verdiyse alın, yasakladıysa kaçının</span>" (Haşr 7) → Teşrî; "<span class="kw">güzel bir örnek vardır</span>" (Ahzâb 21) → Temsil.
+      </div>
+
+      <p style="margin-top: 18px;">Hz. Muhammed (s.a.v.) <strong>son peygamberdir.</strong> (Ahzâb 40 — "hâtemü'n-nebiyyîn")</p>
+    `
+  },
+  {
+    num: "1.6",
+    glyph: "KADER",
+    title: "Kadere İman",
+    body: `
+      <p class="lead">
+        <strong>Kader</strong>, Allah'ın ezelî ilmiyle olacak her şeyi önceden bilmesi, planlaması ve <span class="kw">bir ölçü</span> içinde takdir etmesidir. <strong>Kaza</strong> ise bu takdirin <span class="kw">zamanı geldiğinde gerçekleşmesidir</span>. İkisi birlikte düşünüldüğünde kader/kaza, Allah'ın evrendeki mutlak ilim ve iradesinin iki yüzünü temsil eder.
+      </p>
+
+      <div class="ayet">Şüphesiz biz her şeyi bir ölçüye göre yarattık. <cite>— Kamer 54/49</cite></div>
+      <div class="ayet">Bir şeyin olmasını dilediğinde sözümüz ona ancak "Ol" dememizdir; o da hemen oluverir. <cite>— Yâsîn 36/82</cite></div>
+
+      <p style="margin: 22px 0 10px;"><strong>Kader ve Kaza — Plan ve Uygulama:</strong></p>
+
+      <div class="sifat-group">
+        <div class="sifat-head">
+          <span class="sifat-tag">İki Temel Kavram</span>
+          <span class="sifat-sub">Allah'ın ilim ve irade sıfatlarının iki ayrı boyutu</span>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">Kader <span class="sifat-tr">— Allah'ın ezelî takdiri (plan)</span></div>
+          <div class="sifat-def">Olacak her şeyin ezelde Allah'ın bilgisinde olması ve bir ölçüye göre planlanmasıdır. <strong>İlim</strong> sıfatıyla doğrudan ilişkilidir.</div>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">Kaza <span class="sifat-tr">— Takdirin gerçekleşmesi (uygulama)</span></div>
+          <div class="sifat-def">Allah'ın takdir ettiği şeyin zamanı geldiğinde fiile dönüşmesidir. <strong>İrade ve kudret</strong> sıfatlarıyla doğrudan ilişkilidir.</div>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">Levh-i Mahfuz <span class="sifat-tr">— Korunmuş İlahi Kayıt</span></div>
+          <div class="sifat-def">Allah'ın olacak her şeyi ezelde yazdığı korunmuş ilahi kayıttır. "Levh" levha, "mahfûz" korunmuş demektir.</div>
+          <div class="sifat-ayet">"Yeryüzünde başınıza gelen hiçbir musibet yoktur ki, biz onu yaratmadan önce bir kitapta yazılmış olmasın." <cite>— Hadîd 57/22</cite></div>
+        </div>
+      </div>
+
+      <p style="margin: 22px 0 10px;"><strong>Kader ve İnsan İradesi — Üç Klasik Görüş (Kelam Ekolleri):</strong></p>
+
+      <div class="sifat-group">
+        <div class="sifat-head">
+          <span class="sifat-tag alt">Kelam Ekolleri</span>
+          <span class="sifat-sub">Cebriye · Mu'tezile · Ehl-i Sünnet'in kader anlayışları</span>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">Cebriye <span class="sifat-tr">— Zorlamacılık (aşırı belirlenimcilik)</span></div>
+          <div class="sifat-def">İnsanın özgür iradesi yoktur; her şey Allah tarafından zorla yaratılır görüşündedir. İnsanı sorumsuz kabul ettiği için Ehl-i Sünnet tarafından reddedilmiştir.</div>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">Mu'tezile <span class="sifat-tr">— Aşırı özgürlükçülük</span></div>
+          <div class="sifat-def">İnsan kendi fiilinin yaratıcısıdır; Allah'tan tamamen bağımsız bir iradeye sahiptir. Bu görüş ilahi takdiri sınırlandırdığı için Ehl-i Sünnet tarafından reddedilmiştir.</div>
+        </div>
+
+        <div class="sifat">
+          <div class="sifat-name">Ehl-i Sünnet <span class="sifat-tr">— Halk ve Kesb Teorisi</span></div>
+          <div class="sifat-def">İki ucu uzlaştırır: <strong>fiilin yaratıcısı Allah'tır (halk), insan ise o fiili kazanır/sahiplenir (kesb)</strong>. Hem ilahi takdir hem insan iradesi gerçektir. Bu, kadere imanı sorumluluk bilinciyle birleştirir.</div>
+          <div class="sifat-ayet">"Kim doğru yolu seçerse kendi lehine, kim saparsa kendi aleyhinedir." <cite>— İsrâ 17/15</cite></div>
+        </div>
+      </div>
+
+      <p style="margin: 22px 0 10px;"><strong>İlim ve İcbar (Zorlama) Ayrımı:</strong></p>
+      <p>Allah'ın olacakları önceden bilmesi (ilim), olayların gerçekleşmesini zorlayan bir etken değildir. <strong>Bilmek ile belirlemek farklı kavramlardır.</strong> Bir hocanın öğrencisinin sınavda hangi soruyu yanlış cevaplayacağını önceden tahmin edebilmesi, öğrenciyi yanlış cevaplamaya zorlamış olmaz. Allah'ın ilmi de seçimimizi zorlamaz; ancak seçimimizi bilir.</p>
+
+      <p style="margin: 22px 0 10px;"><strong>Tevekkül — Çalışma ile Birlikte:</strong></p>
+      <div class="ayet">Allah'a tevekkül eden kimseye O yeter. <cite>— Talâk 65/3</cite></div>
+      <p><strong>Tevekkül</strong>, sebepleri terk edip oturup beklemek değildir. Elinden gelen tüm çabayı gösterdikten sonra <em>sonucu Allah'a havale etmektir</em>. Müslüman hem sebeplere yapışır hem de Allah'a güvenir.</p>
+
+      <p style="margin: 22px 0 10px;"><strong>Kadere İmanın Sonuçları — Hayatımıza Etkisi:</strong></p>
+      <div class="sub-list">
+        <div class="sub-item">
+          <div class="sub-key">Başarıda Şükür</div>
+          <div class="sub-val">Başarıyı kendine değil Allah'ın takdirine ve kendi çabasının değerlendirilmesine bağlar; kibirden korur.</div>
+        </div>
+        <div class="sub-item">
+          <div class="sub-key">Sıkıntıda Sabır</div>
+          <div class="sub-val">Zorluğun Allah'ın takdirinde olduğunu kabul eder; umutsuzluğa düşmez. "Belki hayırlısı budur" yaklaşımı.</div>
+        </div>
+        <div class="sub-item">
+          <div class="sub-key">Tevekkül + Çaba</div>
+          <div class="sub-val">Hem çalışır hem güvenir; ne pasifleşir ne aşırı kaygılanır. Dengeli, üretken bir psikoloji.</div>
+        </div>
+        <div class="sub-item">
+          <div class="sub-key">Sorumluluk Bilinci</div>
+          <div class="sub-val">Seçimlerinden sorumlu olduğunu bilir; kötülüklerini kadere yüklemez. İçten gelen bir ahlaki tutarlılık doğurur.</div>
+        </div>
+      </div>
+
+      <div class="sifat-note">
+        <strong>Akademik özet:</strong> İslam'ın kader anlayışı determinizm (Cebriye) ya da aşırı özgürlükçülük (Mu'tezile) değil; her ikisini uzlaştıran <em>halk ve kesb teorisi</em>dir. Doğru anlayış müminde pasiflik değil, dengeli bir aktif yaşam üretir: <span class="kw">çaba + tevekkül + sorumluluk</span> üçgeni.
+      </div>
+    `
+  }
+];
+
+/* ============ DATA — QUESTIONS (loaded from questions-data.js) ============ */
+const CAT_LABELS = {
+  bilgi_kaynaklari: { label: "Bilgi ve Bilgi Kaynakları", color: "var(--cat-bilgi)" },
+  iman_allah:       { label: "İman ve Allah'ın Sıfatları", color: "var(--cat-iman)" },
+  melekler:         { label: "Meleklere İman",            color: "var(--cat-melekler)" },
+  kitaplar:         { label: "Kitaplara İman",            color: "var(--cat-kitaplar)" },
+  peygamberler:     { label: "Peygamberlere İman",        color: "var(--cat-peygamberler)" },
+  kader:            { label: "Kadere İman",               color: "var(--cat-kader)" }
+};
+const DIFF_LABEL = { easy: "Kolay", medium: "Orta", hard: "Zor" };
+const QUESTIONS = window.QUESTION_BANK || [];
+
+const MODULES = [
+  { id:'diagnostic', kind:'diagnostic', label:'Tanı Testi', sub:'Seviye belirleme · 10 karma soru', summaryIndex:null },
+  { id:'topic-bilgi_kaynaklari', kind:'topic', label:'1.1 Bilgi ve Bilgi Kaynakları', sub:'Konu özeti + 10 soru', summaryIndex:0 },
+  { id:'topic-iman_allah',       kind:'topic', label:"1.2 İman ve Allah'ın Sıfatları", sub:'Konu özeti + 10 soru', summaryIndex:1 },
+  { id:'topic-melekler',         kind:'topic', label:'1.3 Meleklere İman',             sub:'Konu özeti + 10 soru', summaryIndex:2 },
+  { id:'topic-kitaplar',         kind:'topic', label:'1.4 Kitaplara İman',             sub:'Konu özeti + 10 soru', summaryIndex:3 },
+  { id:'topic-peygamberler',     kind:'topic', label:'1.5 Peygamberlere İman',         sub:'Konu özeti + 10 soru', summaryIndex:4 },
+  { id:'topic-kader',            kind:'topic', label:'1.6 Kadere İman',                sub:'Konu özeti + 10 soru', summaryIndex:5 },
+  { id:'karma-1', kind:'karma', label:'Karma Test I',  sub:'Konular arası · orta-zor · 10 soru', summaryIndex:null },
+  { id:'karma-2', kind:'karma', label:'Karma Test II', sub:'Konular arası · zor · 10 soru', summaryIndex:null },
+  { id:'final',   kind:'final', label:'Final Tarama',  sub:'En zor · ÖSYM seviyesi · 10 soru', summaryIndex:null }
+];
+const LEVEL_PARAMS = {
+  beginner:     { label:'Başlangıç', sub:'Yumuşak başlangıç · 7 ipucu · 12 saniye geçiş · kolay sorular önce', hints:7, autoSeconds:12, orderByDifficulty:'asc',  color:'#5B8C5A' },
+  intermediate: { label:'Orta',       sub:'Dengeli mod · 5 ipucu · 10 saniye geçiş · standart sınav koşulları', hints:5, autoSeconds:10, orderByDifficulty:'random', color:'#D97D54' },
+  advanced:     { label:'İleri',      sub:'Maksimum zorluk · 3 ipucu · 7 saniye geçiş · zor sorular önce',     hints:3, autoSeconds:7,  orderByDifficulty:'desc', color:'#8B2E2E' }
+};
+const LETTERS = ['A','B','C','D','E'];
+
+/* ============ STATE & PROGRESS ============ */
+let quizState = null;
+let timerInt = null;
+let autoAdvanceInt = null;
+let audioCtx = null;
+
+function defaultProgress() {
+  return { level: null, diagnosticDone: false, scores: {} };
+}
+function loadProgress() {
+  try {
+    const raw = localStorage.getItem('soru_progress_v2');
+    if (raw) return Object.assign(defaultProgress(), JSON.parse(raw));
+  } catch(e){}
+  return defaultProgress();
+}
+function saveProgress() {
+  try { localStorage.setItem('soru_progress_v2', JSON.stringify(app)); } catch(e){}
+}
+function resetProgress() {
+  if (!confirm('Tüm ilerlemeyi silmek istediğinden emin misin? Tanı testi dahil tüm modüller sıfırlanacak.')) return;
+  app = defaultProgress();
+  saveProgress();
+  goTo('welcome');
+}
+let app = loadProgress();
+
+/* ============ NAV ============ */
+function goTo(name) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + name).classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+  const labelMap = {
+    welcome: 'Bilgi ve İnanç',
+    'diagnostic-intro': 'Tanı Testi · Hazırlık',
+    'level-reveal': 'Seviye Belirlendi',
+    hub: 'Çalışma Programı',
+    summary: 'Konu Özeti',
+    quiz: 'Quiz',
+    result: 'Modül Sonucu',
+    final: 'Tüm Üniteyi Tamamladın'
+  };
+  document.getElementById('topbar-label').innerHTML =
+    '<span class="dot"></span>' + (labelMap[name] || '');
+}
+
+/* ============ WELCOME FLOW ============ */
+function welcomeStart() {
+  if (app.diagnosticDone) {
+    renderHub();
+    goTo('hub');
+  } else {
+    goTo('diagnostic-intro');
+  }
+}
+
+/* ============ HUB ============ */
+function renderHub() {
+  const completedCount = MODULES.filter(m => app.scores[m.id]).length;
+  const level = LEVEL_PARAMS[app.level] || LEVEL_PARAMS.intermediate;
+  document.getElementById('hub-level-tag').textContent = level.label;
+  document.getElementById('hub-level-tag').style.background = level.color;
+  document.getElementById('hub-level-sub').textContent = level.sub;
+  document.getElementById('hub-progress').textContent = completedCount + ' / ' + MODULES.length;
+  document.getElementById('hub-progress-fill').style.width = (completedCount/MODULES.length*100)+'%';
+
+  const cards = MODULES.map((m, i) => {
+    const score = app.scores[m.id];
+    const isDone = !!score;
+    const pct = isDone ? Math.round(score.correct/score.total*100) : 0;
+    const kindBadge = m.kind === 'diagnostic' ? 'TANI' :
+                       m.kind === 'topic' ? 'KONU' :
+                       m.kind === 'karma' ? 'KARMA' : 'FİNAL';
+    let metric = m.sub;
+    if (isDone) metric = score.correct + '/' + score.total + ' · ' + pct + '%';
+    return `
+      <button class="mod-card ${isDone ? 'done' : 'open'} kind-${m.kind}" onclick="startModule('${m.id}')">
+        <div class="mod-left">
+          <div class="mod-badge">${kindBadge}</div>
+          <div class="mod-num">${String(i).padStart(2,'0')}</div>
+        </div>
+        <div class="mod-meta">
+          <div class="mod-label">${m.label}</div>
+          <div class="mod-sub">${metric}</div>
+        </div>
+        <div class="mod-cta">
+          ${isDone ? '↻' : '→'}
+        </div>
+      </button>
+    `;
+  }).join('');
+  document.getElementById('hub-modules').innerHTML = cards;
+  renderPracticeCard();
+}
+
+/* ============ ADAPTIF PRATIK (post-Final unlimited practice) ============ */
+function renderPracticeCard() {
+  const finalDone = !!app.scores['final'];
+  const sessions = app.practiceSessions || [];
+  const sessionsCount = sessions.length;
+  const recentDots = sessions.slice(-5).map(s => {
+    const pct = s.correct/s.total;
+    const cls = pct >= 0.8 ? 'good' : (pct >= 0.5 ? 'mid' : 'low');
+    return '<span class="pp-dot '+cls+'" title="'+s.correct+'/'+s.total+'"></span>';
+  }).join('');
+  const levelLabel = app.level ? LEVEL_PARAMS[app.level].label : '—';
+  const totalCorrect = sessions.reduce((s,x)=>s+x.correct,0);
+  const totalAns = sessions.reduce((s,x)=>s+x.total,0);
+  const avgPct = totalAns ? Math.round(totalCorrect/totalAns*100) : 0;
+  const subText = finalDone
+    ? (sessionsCount === 0
+        ? levelLabel + ' seviyesi · her seferinde farklı 10 soru'
+        : sessionsCount + ' oturum · ortalama %' + avgPct + ' · ' + levelLabel + ' seviyesi')
+    : '🔒 Final Tarama bitince açılır';
+
+  const html = `
+    <div class="practice-block">
+      <div class="practice-divider"><span>BONUS</span></div>
+      <button class="mod-card practice-card kind-practice ${finalDone ? 'open' : 'locked'}"
+              ${finalDone ? "onclick=\"startPracticeSession()\"" : "onclick=\"alert('Önce Final Tarama\u0027yı tamamla.')\""}>
+        <div class="mod-left">
+          <div class="mod-badge">SINIRSIZ</div>
+          <div class="mod-num pp-num">∞</div>
+        </div>
+        <div class="mod-meta">
+          <div class="mod-label">Adaptif Pratik</div>
+          <div class="mod-sub">${subText}</div>
+          ${recentDots ? '<div class="pp-dots">'+recentDots+'</div>' : ''}
+        </div>
+        <div class="mod-cta">${finalDone ? '→' : '🔒'}</div>
+      </button>
+    </div>
+  `;
+  let mount = document.getElementById('practice-mount');
+  if (!mount) {
+    mount = document.createElement('div');
+    mount.id = 'practice-mount';
+    document.getElementById('hub-modules').after(mount);
+  }
+  mount.innerHTML = html;
+}
+
+function buildPracticeQuestions() {
+  let pool;
+  if (app.level === 'beginner')      pool = QUESTIONS.filter(q => q.difficulty !== 'hard');
+  else if (app.level === 'advanced') pool = QUESTIONS.filter(q => q.difficulty !== 'easy');
+  else                                pool = QUESTIONS.slice();
+  const recent = new Set(app.practiceRecent || []);
+  const fresh = pool.filter(q => !recent.has(q.id));
+  const finalPool = fresh.length >= 10 ? fresh : pool;
+  return shuffle(finalPool).slice(0, 10);
+}
+
+function startPracticeSession() {
+  if (!app.scores['final']) { alert('Adaptif Pratik, Final Tarama tamamlandıktan sonra açılır.'); return; }
+  const picked = buildPracticeQuestions();
+  if (picked.length === 0) { alert('Pratik için soru bulunamadı.'); return; }
+  const prepared = picked.map(shuffleOptionsForQ);
+  const lvl = LEVEL_PARAMS[app.level || 'intermediate'];
+  const total = prepared.length * 90;
+  const sessionNum = (app.practiceSessions?.length || 0) + 1;
+  quizState = {
+    moduleId: 'practice',
+    moduleKind: 'practice',
+    moduleLabel: 'Adaptif Pratik #' + sessionNum,
+    questions: prepared,
+    index: 0, answers: [],
+    timeLeft: total, totalSeconds: total,
+    hintsLeft: lvl.hints, autoSeconds: lvl.autoSeconds,
+    hintUsedThisQ: false, locked: false, paused: false
+  };
+  app.currentModuleId = 'practice';
+  document.getElementById('q-tot').textContent = prepared.length;
+  document.getElementById('quiz-module-label').textContent = quizState.moduleLabel;
+  buildDots(); renderQuestion(); startTimer(); goTo('quiz');
+}
+
+function startModule(moduleId) {
+  const m = MODULES.find(x => x.id === moduleId);
+  if (!m) return;
+  app.currentModuleId = moduleId;
+  if (m.kind === 'topic') {
+    renderSingleTopic(m.summaryIndex, m);
+    goTo('summary');
+  } else {
+    // Diagnostic / karma / final — show a short intro then quiz
+    if (m.kind === 'diagnostic') {
+      goTo('diagnostic-intro');
+    } else {
+      startQuizForModule(moduleId);
+    }
+  }
+}
+
+/* ============ SINGLE TOPIC SUMMARY ============ */
+function renderSingleTopic(idx, module) {
+  const t = TOPICS[idx];
+  document.getElementById('summary-module-label').textContent = module.label;
+  const mount = document.getElementById('topics-mount');
+  mount.innerHTML = `
+    <article class="topic-card">
+      <div class="topic-head">
+        <div>
+          <div class="topic-num">§ ${t.num}</div>
+          <div class="topic-title">${t.title}</div>
+        </div>
+        <span class="topic-glyph">${t.glyph}</span>
+      </div>
+      <div class="topic-body">${t.body}</div>
+    </article>
+  `;
+}
+
+/* ============ DIAGNOSTIC ============ */
+function startDiagnostic() {
+  startQuizForModule('diagnostic');
+}
+
+/* ============ QUIZ ENGINE ============ */
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function shuffleOptionsForQ(q) {
+  const entries = LETTERS.map(l => ({ letter:l, text:q.options[l], isCorrect: l === q.answer }));
+  const sh = shuffle(entries);
+  const newOptions = {};
+  let newAnswer = 'A';
+  sh.forEach((e, i) => {
+    newOptions[LETTERS[i]] = e.text;
+    if (e.isCorrect) newAnswer = LETTERS[i];
+  });
+  return Object.assign({}, q, { options: newOptions, answer: newAnswer });
+}
+
+function startQuizForModule(moduleId) {
+  const m = MODULES.find(x => x.id === moduleId);
+  const moduleQuestions = QUESTIONS.filter(q => q.group === moduleId);
+  if (moduleQuestions.length === 0) {
+    alert('Bu modülde soru bulunamadı: ' + moduleId);
+    return;
+  }
+  const lvl = LEVEL_PARAMS[app.level || 'intermediate'];
+  const diffRank = { easy:1, medium:2, hard:3 };
+  let ordered = moduleQuestions.slice();
+  if (lvl.orderByDifficulty === 'asc')      ordered.sort((a,b) => diffRank[a.difficulty]-diffRank[b.difficulty]);
+  else if (lvl.orderByDifficulty === 'desc') ordered.sort((a,b) => diffRank[b.difficulty]-diffRank[a.difficulty]);
+  else ordered = shuffle(ordered);
+  const prepared = ordered.map(shuffleOptionsForQ);
+
+  const secondsPerQuestion = m.kind === 'diagnostic' ? 75 : (m.kind === 'final' ? 105 : 90);
+  const total = prepared.length * secondsPerQuestion;
+
+  quizState = {
+    moduleId, moduleKind: m.kind, moduleLabel: m.label,
+    questions: prepared,
+    index: 0, answers: [],
+    timeLeft: total, totalSeconds: total,
+    hintsLeft: lvl.hints, autoSeconds: lvl.autoSeconds,
+    hintUsedThisQ: false, locked: false, paused: false
+  };
+  document.getElementById('q-tot').textContent = prepared.length;
+  document.getElementById('quiz-module-label').textContent = m.label;
+  buildDots(); renderQuestion(); startTimer(); goTo('quiz');
+}
+
+function buildDots() {
+  document.getElementById('dots-row').innerHTML =
+    quizState.questions.map((_,i) => '<div class="dot" data-i="'+i+'"></div>').join('');
+  updateDots();
+}
+function updateDots() {
+  document.querySelectorAll('#dots-row .dot').forEach((d, i) => {
+    d.className = 'dot';
+    const ans = quizState.answers[i];
+    if (ans) d.classList.add(ans.isRight ? 'correct' : 'wrong');
+    else if (i === quizState.index) d.classList.add('current');
+  });
+}
+
+function renderQuestion() {
+  const q = quizState.questions[quizState.index];
+  const cat = CAT_LABELS[q.category];
+  const diffLabel = DIFF_LABEL[q.difficulty];
+  document.getElementById('q-cur').textContent = quizState.index + 1;
+  document.getElementById('progress-fill').style.width =
+    ((quizState.index) / quizState.questions.length * 100) + '%';
+  const paragraphHtml = q.paragraph
+    ? `<div class="q-paragraph">${q.paragraph.replace(/\n/g,'<br>')}</div>` : '';
+  document.getElementById('q-mount').innerHTML = `
+    <article class="question-card" style="--cat: ${cat.color};">
+      <div class="q-tags">
+        <span class="tag tag-cat" style="--cat: ${cat.color}; color: ${cat.color}; border-color: ${cat.color};">${cat.label}</span>
+        <span class="tag tag-diff ${q.difficulty}">${diffLabel}</span>
+      </div>
+      ${paragraphHtml}
+      <h3 class="q-text">${q.question}</h3>
+      <div class="hint-card" id="hint-card"></div>
+      <div class="options" id="opts">
+        ${LETTERS.map(l => '<button class="option" data-letter="'+l+'" onclick="pickOption(\''+l+'\')"><span class="opt-letter">'+l+'</span><span class="opt-text">'+q.options[l]+'</span><span class="opt-mark"></span></button>').join('')}
+      </div>
+      <div class="feedback" id="feedback"></div>
+      <div class="auto-advance" id="auto-advance"></div>
+    </article>
+  `;
+  quizState.locked = false; quizState.hintUsedThisQ = false;
+  document.getElementById('next-btn').disabled = true;
+  document.getElementById('next-btn').innerHTML =
+    (quizState.index === quizState.questions.length - 1 ? 'Modülü Bitir' : 'Sonraki Soru') + ' <span aria-hidden="true">→</span>';
+  document.getElementById('hint-btn').disabled = quizState.hintsLeft === 0;
+  document.getElementById('hint-count').textContent = quizState.hintsLeft;
+  updateDots();
+}
+
+function pickOption(letter) {
+  if (quizState.locked) return;
+  quizState.locked = true;
+  const q = quizState.questions[quizState.index];
+  const isRight = letter === q.answer;
+  document.querySelectorAll('#opts .option').forEach(btn => {
+    btn.classList.add('locked');
+    const l = btn.dataset.letter;
+    if (l === q.answer) { btn.classList.add('correct'); btn.querySelector('.opt-mark').textContent = '✓'; }
+    if (l === letter && !isRight) { btn.classList.add('wrong'); btn.querySelector('.opt-mark').textContent = '✗'; }
+  });
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback show ' + (isRight ? 'correct' : 'wrong');
+  fb.innerHTML = `
+    <div class="fb-head">${isRight ? '✓ Doğru' : '✗ Yanlış · Doğru cevap: ' + q.answer}</div>
+    <div>${q.explanation}</div>
+  `;
+  quizState.answers[quizState.index] = { qid: q.id, picked: letter, correct: q.answer, isRight };
+  document.getElementById('hint-btn').disabled = true;
+  playBeep(isRight);
+  document.getElementById('next-btn').disabled = false;
+  updateDots();
+  pauseMainTimer();
+  startAutoAdvance(quizState.autoSeconds);
+}
+
+function nextQuestion() {
+  stopAutoAdvance();
+  if (quizState.index === quizState.questions.length - 1) { finishQuiz(); return; }
+  quizState.index++; renderQuestion(); resumeMainTimer();
+}
+
+function useHint() {
+  if (quizState.hintsLeft === 0 || quizState.locked || quizState.hintUsedThisQ) return;
+  const q = quizState.questions[quizState.index];
+  const card = document.getElementById('hint-card');
+  card.innerHTML = `<div class="hint-head"><span class="hint-bulb">💡</span> İpucu</div><div class="hint-body">${q.hint || 'Bu soru için ipucu bulunamadı.'}</div>`;
+  card.classList.add('show');
+  quizState.hintsLeft--;
+  quizState.hintUsedThisQ = true;
+  document.getElementById('hint-count').textContent = quizState.hintsLeft;
+  document.getElementById('hint-btn').disabled = true;
+}
+
+/* ============ AUTO-ADVANCE ============ */
+function startAutoAdvance(seconds) {
+  stopAutoAdvance();
+  const total = seconds;
+  let remaining = seconds;
+  const el = document.getElementById('auto-advance');
+  if (!el) return;
+  const render = () => {
+    const pct = ((total - remaining) / total) * 100;
+    el.innerHTML = `
+      <div class="aa-row">
+        <span class="aa-label">Bir sonraki soruya geçiş</span>
+        <span class="aa-count">${remaining}s</span>
+      </div>
+      <div class="aa-track"><div class="aa-fill" style="width:${pct}%"></div></div>
+      <div class="aa-hint">Ana süre duraklatıldı · şimdi geçmek için "Sonraki Soru"</div>
+    `;
+    el.classList.add('show');
+  };
+  render();
+  autoAdvanceInt = setInterval(() => {
+    remaining--;
+    if (remaining <= 0) { stopAutoAdvance(); nextQuestion(); }
+    else render();
+  }, 1000);
+}
+function stopAutoAdvance() {
+  if (autoAdvanceInt) { clearInterval(autoAdvanceInt); autoAdvanceInt = null; }
+  const el = document.getElementById('auto-advance');
+  if (el) { el.classList.remove('show'); el.innerHTML = ''; }
+}
+
+/* ============ TIMER ============ */
+function startTimer() {
+  clearInterval(timerInt);
+  updateTimerDisplay();
+  timerInt = setInterval(() => {
+    quizState.timeLeft--;
+    updateTimerDisplay();
+    if (quizState.timeLeft <= 0) { clearInterval(timerInt); finishQuiz(true); }
+  }, 1000);
+}
+function pauseMainTimer() {
+  if (timerInt) { clearInterval(timerInt); timerInt = null; }
+  quizState.paused = true;
+  document.getElementById('timer').classList.add('paused');
+}
+function resumeMainTimer() {
+  quizState.paused = false;
+  document.getElementById('timer').classList.remove('paused');
+  startTimer();
+}
+function updateTimerDisplay() {
+  const t = document.getElementById('timer');
+  const m = Math.floor(quizState.timeLeft / 60);
+  const s = quizState.timeLeft % 60;
+  t.textContent = '⏱ ' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  t.classList.remove('warn','danger');
+  if (quizState.timeLeft <= 60) t.classList.add('danger');
+  else if (quizState.timeLeft <= 180) t.classList.add('warn');
+}
+
+/* ============ RESULTS ============ */
+function finishQuiz(timeUp) {
+  clearInterval(timerInt); stopAutoAdvance();
+  for (let i = 0; i < quizState.questions.length; i++) {
+    if (!quizState.answers[i]) {
+      quizState.answers[i] = { qid: quizState.questions[i].id, picked: null, correct: quizState.questions[i].answer, isRight: false };
+    }
+  }
+  const correctCount = quizState.answers.filter(a => a.isRight).length;
+  const total = quizState.questions.length;
+  app.scores[quizState.moduleId] = { correct: correctCount, total };
+
+  if (quizState.moduleId === 'diagnostic') {
+    app.diagnosticDone = true;
+    if (correctCount <= 3) app.level = 'beginner';
+    else if (correctCount <= 6) app.level = 'intermediate';
+    else app.level = 'advanced';
+    saveProgress();
+    showLevelReveal(correctCount);
+    return;
+  }
+
+  // Practice: don't overwrite module scores; track session history
+  if (quizState.moduleId === 'practice') {
+    if (!app.practiceSessions) app.practiceSessions = [];
+    app.practiceSessions.push({ correct: correctCount, total, ts: Date.now(), level: app.level });
+    const usedIds = quizState.questions.map(q => q.id);
+    app.practiceRecent = [...usedIds, ...(app.practiceRecent||[])].slice(0, 30);
+    delete app.scores['practice']; // ensure not counted as a permanent module
+    saveProgress();
+    showModuleResult(correctCount, total, timeUp);
+    return;
+  }
+
+  saveProgress();
+  showModuleResult(correctCount, total, timeUp);
+}
+
+function showLevelReveal(correctCount) {
+  const total = quizState.questions.length;
+  const level = LEVEL_PARAMS[app.level];
+  document.getElementById('lr-level').textContent = level.label.toUpperCase();
+  document.getElementById('lr-level').style.color = level.color;
+  document.getElementById('lr-score').textContent = correctCount + ' / ' + total;
+  document.getElementById('lr-sub').textContent = level.sub;
+  document.getElementById('lr-hints').textContent = level.hints;
+  document.getElementById('lr-auto').textContent = level.autoSeconds + 's';
+  document.getElementById('lr-order').textContent =
+    level.orderByDifficulty === 'asc' ? 'Kolay → Zor' :
+    level.orderByDifficulty === 'desc' ? 'Zor → Kolay' : 'Karışık';
+  goTo('level-reveal');
+  if (app.level === 'advanced') setTimeout(fireConfetti, 500);
+}
+
+function showModuleResult(correctCount, total, timeUp) {
+  document.getElementById('res-module-label').textContent = quizState.moduleLabel;
+  document.getElementById('res-of').textContent = '/ ' + total;
+  const pct = Math.round(correctCount/total*100);
+
+  // animate score
+  const numEl = document.getElementById('res-score');
+  const pctEl = document.getElementById('res-pct');
+  let n = 0;
+  const step = Math.max(1, Math.ceil(correctCount / 25));
+  const interval = setInterval(() => {
+    n += step;
+    if (n >= correctCount) { n = correctCount; clearInterval(interval); }
+    numEl.textContent = n;
+    pctEl.textContent = Math.round(n / total * 100) + '%';
+  }, 40);
+
+  // ring
+  const circumference = 2 * Math.PI * 78;
+  const ring = document.getElementById('ring-fill');
+  ring.setAttribute('stroke-dasharray', circumference);
+  ring.setAttribute('stroke-dashoffset', circumference);
+  setTimeout(() => { ring.setAttribute('stroke-dashoffset', circumference * (1 - correctCount/total)); }, 200);
+
+  let tag = 'Modül', title = '', sub = '';
+  if (correctCount === total)        { tag='Mükemmel';        title='Tamamı doğru.';                 sub='Bu modülde ustalaştın. Sıradakine güvenle geç.'; }
+  else if (correctCount >= total*0.8){ tag='Çok İyi';          title='Eşik üstü performans.';         sub='Yanlışlarını incele, sonraki modüle hazırsın.'; }
+  else if (correctCount >= total*0.6){ tag='İyi';              title='Sağlam bir performans.';        sub='Bazı kavramları gözden geçirmen faydalı olur.'; }
+  else if (correctCount >= total*0.4){ tag='Geliştirilebilir'; title='Daha fazla pratik gerekiyor.';  sub='Konuyu yeniden okumanı öneririm.'; }
+  else                                { tag='Yeniden Başla';    title='Konu özetine dönsene.';          sub='Önce temelleri sağlamlaştır, sonra tekrar dene.'; }
+  if (timeUp) sub = 'Süre doldu. ' + sub;
+  document.getElementById('verdict-tag').textContent = tag;
+  document.getElementById('verdict-title').textContent = title;
+  document.getElementById('verdict-sub').textContent = sub;
+
+  // wrong list
+  const wrongs = [];
+  quizState.questions.forEach((q, i) => {
+    const a = quizState.answers[i];
+    if (!a.isRight) wrongs.push({ q, a });
+  });
+  const wrongPanel = document.getElementById('wrong-panel');
+  if (wrongs.length === 0) { wrongPanel.style.display = 'none'; }
+  else {
+    wrongPanel.style.display = '';
+    document.getElementById('wrong-list').innerHTML = wrongs.map(({q,a}) => `
+      <div class="wrong-item">
+        <div class="wrong-head" onclick="
+          this.parentNode.classList.toggle('open');
+          const b=this.nextElementSibling;
+          b.style.maxHeight = this.parentNode.classList.contains('open') ? b.scrollHeight+'px' : '0px';
+        ">
+          <span class="wh-meta">${CAT_LABELS[q.category].label}</span>
+          <span class="wh-q">${q.question.length > 80 ? q.question.slice(0,80)+'…' : q.question}</span>
+          <span class="chev">▾</span>
+        </div>
+        <div class="wrong-body">
+          <div class="wrong-body-inner">
+            ${q.paragraph ? '<span class="lbl">Paragraf</span><div>'+q.paragraph.replace(/\n/g,'<br>')+'</div>' : ''}
+            <span class="lbl">Soru</span><div>${q.question}</div>
+            <span class="lbl">Senin cevabın</span>
+            <div class="your">${a.picked ? a.picked + ') ' + q.options[a.picked] : '— (cevaplanmadı)'}</div>
+            <span class="lbl">Doğru cevap</span>
+            <div class="right">${q.answer}) ${q.options[q.answer]}</div>
+            <span class="lbl">Açıklama</span><div>${q.explanation}</div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  if (correctCount/total >= 0.8) setTimeout(fireConfetti, 500);
+  goTo('result');
+
+  // All modules done?
+  const allDone = MODULES.every(m => app.scores[m.id]);
+  const isPractice = quizState.moduleId === 'practice';
+  const nextBtn = document.getElementById('res-cta-next');
+  const finalBtn = document.getElementById('res-cta-final');
+  if (isPractice) {
+    nextBtn.style.display = '';
+    nextBtn.innerHTML = 'Yeni Pratik Oturumu →';
+    finalBtn.style.display = 'none';
+  } else if (allDone) {
+    nextBtn.style.display = 'none';
+    finalBtn.style.display = '';
+  } else {
+    nextBtn.style.display = '';
+    nextBtn.innerHTML = 'Sıradaki Modül →';
+    finalBtn.style.display = 'none';
+  }
+}
+
+function returnToHub() { renderHub(); goTo('hub'); }
+
+function goNextModule() {
+  if (quizState.moduleId === 'practice') { startPracticeSession(); return; }
+  const i = MODULES.findIndex(m => m.id === quizState.moduleId);
+  for (let j = i+1; j < MODULES.length; j++) {
+    if (!app.scores[MODULES[j].id]) { startModule(MODULES[j].id); return; }
+  }
+  // No more topic modules; if final not done, suggest final; otherwise go to practice
+  if (app.scores['final']) { startPracticeSession(); return; }
+  returnToHub();
+}
+
+function retryModule() {
+  if (quizState.moduleId === 'practice') { startPracticeSession(); return; }
+  startModule(quizState.moduleId);
+}
+
+function showFinalSummary() {
+  let totalCorrect = 0, totalQuestions = 0;
+  MODULES.forEach(m => {
+    const sc = app.scores[m.id];
+    if (sc) { totalCorrect += sc.correct; totalQuestions += sc.total; }
+  });
+  document.getElementById('fs-total').textContent = totalCorrect + ' / ' + totalQuestions;
+  const pct = totalQuestions ? Math.round(totalCorrect/totalQuestions*100) : 0;
+  document.getElementById('fs-pct').textContent = pct + '%';
+  const rows = MODULES.map(m => {
+    const sc = app.scores[m.id];
+    const scoreText = sc ? sc.correct+'/'+sc.total : '—';
+    const sPct = sc ? Math.round(sc.correct/sc.total*100) : 0;
+    return `
+      <div class="fs-row">
+        <div class="fs-label">${m.label}</div>
+        <div class="fs-bar"><div class="fs-bar-fill" style="width:${sPct}%"></div></div>
+        <div class="fs-score">${scoreText}</div>
+      </div>
+    `;
+  }).join('');
+  document.getElementById('fs-modules').innerHTML = rows;
+  goTo('final');
+  setTimeout(fireConfetti, 400);
+}
+
+/* ============ AUDIO ============ */
+function playBeep(success) {
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.connect(g); g.connect(audioCtx.destination);
+    o.type = success ? 'sine' : 'square';
+    o.frequency.value = success ? 660 : 180;
+    g.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.12, audioCtx.currentTime + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + (success ? 0.18 : 0.24));
+    o.start();
+    o.stop(audioCtx.currentTime + (success ? 0.2 : 0.26));
+  } catch(e) {}
+}
+
+/* ============ CONFETTI ============ */
+function fireConfetti() {
+  const canvas = document.getElementById('confetti');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+  const colors = ['#D97D54','#E8B45A','#5B8C5A','#1B1F3B','#6E4C8E','#2E6E8C'];
+  const parts = [];
+  for (let i = 0; i < 140; i++) {
+    parts.push({
+      x: Math.random() * canvas.width, y: -20 - Math.random() * 200,
+      vx: (Math.random() - 0.5) * 4, vy: 2 + Math.random() * 4,
+      r: 4 + Math.random() * 6, rot: Math.random() * Math.PI, vr: (Math.random() - 0.5) * 0.2,
+      color: colors[Math.floor(Math.random() * colors.length)]
+    });
+  }
+  let frames = 0;
+  function loop() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    parts.forEach(p => {
+      p.x += p.vx; p.y += p.vy; p.vy += 0.06; p.rot += p.vr;
+      ctx.save();
+      ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.r/2, -p.r/2, p.r, p.r*0.6);
+      ctx.restore();
+    });
+    frames++;
+    if (frames < 280) requestAnimationFrame(loop);
+    else ctx.clearRect(0,0,canvas.width,canvas.height);
+  }
+  loop();
+}
+
+/* ============ INIT ============ */
+// If returning user with diagnostic done, show hub option
+if (app.diagnosticDone) {
+  const lvl = LEVEL_PARAMS[app.level];
+  const completedCount = MODULES.filter(m => app.scores[m.id]).length;
+  document.getElementById('w-returning').classList.add('show');
+  document.getElementById('w-returning-level').textContent = lvl.label;
+  document.getElementById('w-returning-progress').textContent =
+    completedCount + ' / ' + MODULES.length + ' modül';
+}
+</script>
+
+</body>
+</html>
